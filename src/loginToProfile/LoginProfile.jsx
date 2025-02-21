@@ -17,7 +17,4 @@ export default function UserProfile() {
         </div>
     );
 }
-//hey raju
-
-// hi raju paju 
-// raju donation dede ve coc me 
+//hey this is testing
