@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function UserProfile() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    //Toggle login status for demonstration
+    //Toggle login status for demonstration purposes    
     const toggleLogin = () => {
         setIsLoggedIn(!isLoggedIn);
     };
@@ -17,4 +17,5 @@ export default function UserProfile() {
         </div>
     );
 }
+//just to take a look
 
