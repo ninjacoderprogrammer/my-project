@@ -14,7 +14,6 @@ export default function UserProfile() {
             <button onClick={toggleLogin}>
                 {isLoggedIn ? "Log out" : "Log in"}
             </button>
-            <h2>sadcsddaskjcdjcdja</h2>
         </div>
     );
 }
