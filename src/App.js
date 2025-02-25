@@ -1,12 +1,15 @@
 import './App.css';
-// import Greetings from './component/greeting/Greetings';
 import Login from './component/Login/Login.jsx';
+import NavBar from './component/navbar/NavBar.jsx';
+import Footer from './component/navbar_footer/Footer.jsx';
 
 function App() {
   console.log("rgr")
   return (
     <div>
+      <NavBar />
       <Login />
+      <Footer />
     </div>
   );
 }
