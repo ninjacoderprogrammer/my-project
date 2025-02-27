@@ -1,6 +1,10 @@
 .navbar {
-  background-color: #333;
-  padding: 0.5rem 1rem;
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-list {
@@ -8,18 +12,56 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav-list li {
-  margin-right: 1rem;
+  margin: 0 1rem;
+  position: relative;
 }
 
 .nav-list li a {
-  color: #fff;
+  color: #ecf0f1;
   text-decoration: none;
   font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .nav-list li a:hover {
-  text-decoration: underline;
+  color: #3498db;
+  text-decoration: none;
+}
+
+/* Create underline effect on hover */
+.nav-list li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.nav-list li a:hover::after {
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-list li {
+    margin: 0.5rem 0;
+  }
 }

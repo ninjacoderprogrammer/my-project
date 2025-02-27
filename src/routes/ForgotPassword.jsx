@@ -12,7 +12,7 @@ const ForgotPassword = () => {
         <input type="email" placeholder="Email" className="input-field" />
         <button className="reset-button">Reset Password</button>
         <p className="back-to-login">
-          <a href="#">Back to Login</a>
+          <Link to="/login">Back to Login</Link>
         </p>
       </div>
     </div>
