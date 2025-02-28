@@ -20,7 +20,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
-  
+
   .signup-left {
     width: 50%;
     background: black;
@@ -55,9 +55,12 @@ body {
   
   .checkbox {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    /* align-items: center; */
+    /* margin-bottom: 20px; */
+    margin-left: 0px;
+    font-size: smaller;
   }
+ 
   
   button {
     width: 100%;
