@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 
-import { FaBars, FaTimes } from "react-icons/fa";
-
-
 function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -41,7 +38,6 @@ function NavBar() {
       </nav>
     </>
   );
-};
-
+}
 
 export default NavBar;
