@@ -8,11 +8,17 @@ import SignUp from "./routes/SignUp.jsx";
 import Home from "./routes/Home.jsx"
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/contact", element: <Contact /> },
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <SignUp /> },
-  { path: "/Home", element: <Home /> }
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <Home /> }, // Default route
+      { path: "contact", element: <Contact /> },
+      { path: "login", element: <Login /> },
+      { path: "signup", element: <SignUp /> },
+      { path: "home", element: <Home /> }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
