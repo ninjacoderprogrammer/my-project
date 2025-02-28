@@ -6,7 +6,7 @@ import Contact from "./routes/Contact.jsx";
 import Login from "./routes/Login.jsx";
 import SignUp from "./routes/SignUp.jsx";
 import Home from "./routes/Home.jsx"
-import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 
 const router = createBrowserRouter([
