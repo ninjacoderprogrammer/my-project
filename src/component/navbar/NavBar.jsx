@@ -30,7 +30,6 @@ function NavBar() {
         <div className="close-button" onClick={closeSidebar}>×</div>
         <ul>
           <li><Link to="/home" onClick={closeSidebar}>Home</Link></li>
-          <li><Link to="/about" onClick={closeSidebar}>About</Link></li>
           <li><Link to="/contact" onClick={closeSidebar}>Contact</Link></li>
           <li><Link to="/login" onClick={closeSidebar}>Login</Link></li>
           <li><Link to="/signup" onClick={closeSidebar}>Sign Up</Link></li>

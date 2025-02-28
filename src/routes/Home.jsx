@@ -18,17 +18,17 @@ const Home = () => {
       <div className="features-section">
         <div className="feature-card">
           <h3>Feature One</h3>
-          <p>Description of the first amazing feature of your application.</p>
+          <p>Description.</p>
         </div>
         
         <div className="feature-card">
           <h3>Feature Two</h3>
-          <p>Description of the second amazing feature of your application.</p>
+          <p>Description.</p>
         </div>
         
         <div className="feature-card">
           <h3>Feature Three</h3>
-          <p>Description of the third amazing feature of your application.</p>
+          <p>Description.</p>
         </div>
       </div>
     </div>
