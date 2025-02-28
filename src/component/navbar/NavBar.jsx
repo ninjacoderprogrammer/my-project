@@ -6,30 +6,40 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 
 function NavBar() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const toggleMenu = () => {
-      setIsOpen(!isOpen);
-    };
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   return (
-    <nav className="navbar">
-    <div className="nav-container">
-      <h2 className="logo">My Website</h2>
-      <div className="menu-icon" onClick={toggleMenu}>
-        {isOpen ? <FaTimes /> : <FaBars />}
+    <>
+      {/* Hamburger menu button */}
+      <div className="menu-button" onClick={toggleSidebar}>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
       </div>
-      <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
-      <li><Link to="/home">Home</Link></li>
-      <li><Link to="/about">About</Link></li>
-      <li><Link to="/contact">Contact</Link></li>
-      <li><Link to="/login">Login</Link></li>
-      <li><Link to="/signup">Sign Up</Link></li>
-    </ul>
-    </div>
-  </nav>
+
+      {/* Overlay to close sidebar when clicking outside */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
+
+      {/* Sidebar navigation */}
+      <nav className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        <div className="close-button" onClick={closeSidebar}>×</div>
+        <ul>
+          <li><Link to="/home" onClick={closeSidebar}>Home</Link></li>
+          <li><Link to="/about" onClick={closeSidebar}>About</Link></li>
+          <li><Link to="/contact" onClick={closeSidebar}>Contact</Link></li>
+          <li><Link to="/login" onClick={closeSidebar}>Login</Link></li>
+          <li><Link to="/signup" onClick={closeSidebar}>Sign Up</Link></li>
+        </ul>
+      </nav>
+    </>
   );
 };
 

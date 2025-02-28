@@ -70,3 +70,89 @@
     transform: translateY(0);
   }
 }
+
+/* Hamburger Menu Button */
+.menu-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  position: fixed;
+  left: -280px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #2c3e50;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  padding-top: 50px;
+}
+
+.sidebar-open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #34495e;
+}
+
+.sidebar li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.sidebar li a:hover {
+  color: #3498db;
+  padding-left: 5px;
+}
+
+/* Close button inside sidebar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Overlay to close sidebar when clicking outside */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
