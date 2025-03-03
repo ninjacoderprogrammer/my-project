@@ -1,7 +1,6 @@
 import React from "react";
-import "./ForgotPasswordCss.css";
+import "../component/ForgetPassword/forgat_password.css";
 import { Link } from "react-router-dom";
-
 
 const ForgotPassword = () => {
   return (

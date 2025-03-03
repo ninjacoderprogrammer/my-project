@@ -1,41 +1,46 @@
 import React, { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import '../component/Login/LoginCss.css';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useOutletContext();
-  const navigate = useNavigate();
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const navigate = useNavigate()
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Authentication logic would go here
-    // For now just simulate successful login
-    setIsLoggedIn(true);
-    navigate("/dashboard"); // Redirect to dashboard after login
-  };
-
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      axios.post('http://localhost:3001/login',{email,password})
+      .then(result=> {
+        console.log("result : ",result)
+        if(result.status === 200){
+          navigate('/home')
+        }
+        
+      })
+      .catch(err=> console.log(err))
+  }
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSubmit}>
       <div className="login-container">
         <div className="login-box">
           <h2>Login</h2>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             className="input-field"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            // value={username}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
             className="input-field"
-            value={password}
+            // value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" className="login-button">Sign In</button>
+          <button type="submit" className="login-button">Login</button>
           <button className="forgot-button">Forgot Password</button>
         </div>
       </div>
