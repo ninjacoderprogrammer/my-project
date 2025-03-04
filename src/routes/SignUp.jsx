@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 // import '../component/Home/Home.css';
 
-const SignupPage = () => {
+const SignupPage = () => {̥
 
     const [name, setName] = useState()
     const [email, setEmail] = useState()
@@ -19,7 +19,7 @@ const SignupPage = () => {
           navigate('/login')
         })
         .catch(err=> console.log(err))
-    }
+    }̥
 
   return (
     <div className="signup-container">
