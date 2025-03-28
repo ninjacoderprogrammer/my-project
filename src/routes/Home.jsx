@@ -6,8 +6,8 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="hero-section">
-        <h1>Welcome to Our Application</h1>
-        <p>Your one-stop solution for all your needs</p>
+        <h1>Effortless Billing, Smarter Shopping</h1>
+        <p>Speed up checkouts, reduce errors, and maximize efficiency with our system</p>
         
         <div className="cta-buttons">
           <Link to="/login" className="btn btn-primary">Login</Link>
@@ -17,18 +17,18 @@ const Home = () => {
       
       <div className="features-section">
         <div className="feature-card">
-          <h3>Feature One</h3>
-          <p>Description.</p>
+          <h1>Smart Billing</h1>
+          <p>Generate detailed bills with product-wise breakdown, tax calculation, and automatic discounts. Supports multiple payment methods like cash, card, and UPI.</p>
         </div>
         
         <div className="feature-card">
-          <h3>Feature Two</h3>
-          <p>Description.</p>
+          <h1>Inventory Management</h1>
+          <p>Track product stock in real-time, manage categories, get low-stock alerts, and update inventory automatically after each sale.</p>
         </div>
         
         <div className="feature-card">
-          <h3>Feature Three</h3>
-          <p>Description.</p>
+          <h1>Sales Analytics</h1>
+          <p>View daily, weekly, or monthly sales reports with charts. Monitor top-selling items, revenue trends, and employee performance.</p>
         </div>
       </div>
     </div>

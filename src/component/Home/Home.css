@@ -86,7 +86,7 @@
 }
 
 .feature-card {
-  background-color: #fff;
+  background-color: #f0f0f0;
   padding: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -99,14 +99,14 @@
 }
 
 .feature-card h3 {
-  color: black;
+  color: #2C3E50;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 .feature-card p {
-  color: #555;
+  color: #666;
   line-height: 1.6;
 }
 
