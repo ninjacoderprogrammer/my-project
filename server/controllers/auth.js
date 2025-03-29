@@ -2,7 +2,7 @@
 
 // Importing database connection
 
-const pool = require('../config/db');
+const pool = require('../../backend/src/config/db');
 
 // api to get all users
 const get_all_users = async (req, res) => {

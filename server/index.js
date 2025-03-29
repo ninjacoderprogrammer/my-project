@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./db'); // Import PostgreSQL connection
 
+// Database connection is used in controllers
 const { createUser, get_all_users } = require('./controllers/auth');
 
 const app = express();
