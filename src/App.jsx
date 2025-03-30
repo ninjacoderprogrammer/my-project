@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import NavBar from "./component/navbar/NavBar";
-import Footer from "./component/Nav_Footer/Footer";
+import Footer from "./component/nav_footer/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
