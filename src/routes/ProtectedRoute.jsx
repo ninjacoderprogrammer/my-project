@@ -4,8 +4,6 @@ function ProtectedRoute({ children }) {
   const [isLoggedIn] = useOutletContext();
   
   if (!isLoggedIn) {
-    console.log("Moved Back To Login");
-    
     return <Navigate to="/login" />;
   }
   

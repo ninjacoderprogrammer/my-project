@@ -6,27 +6,20 @@ import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',          
-    password: ''
-  });
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [phone, setPhone] = useState()
+    const [password, setPassword] = useState()
+    const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/signup', formData);
-      alert(response.data.message);
-    } catch (error) {
-      console.error(error);
-      alert('Error registering user');
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:3001/register',{name,email,phone,password})
+        .then(result=> {console.log(result)
+          navigate('/login')
+        })
+        .catch(err=> console.log(err))
     }
-  };
 
   return (
     <div className="signup-container">
@@ -42,16 +35,16 @@ const SignupPage = () => {
           <h2>Create an account</h2>
           <form onSubmit={handleSubmit}>
             <label>Full Name</label>
-            <input type="text" name="name" placeholder="Full Name" required onChange={handleChange} />
+            <input type="text" placeholder="Full Name" required onChange={(e) => setName(e.target.value)} />
 
             <label>Email Address</label>
-            <input type="email" name="email" placeholder="johndoe@email.com" required onChange={handleChange} />
+            <input type="email" placeholder="johndoe@email.com" required onChange={(e) => setEmail(e.target.value)} />
 
             <label>Phone no.</label>
-            <input type="text" name="phone" placeholder="+01" required onChange={handleChange}/>
+            <input type="text" placeholder="+01" required onChange={(e) => setPhone(e.target.value)}/>
 
             <label>Password</label>
-            <input type="password" name="password" placeholder="Password" required onChange={handleChange} />
+            <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
 
             <button type="submit">Create an account</button>
           </form>
