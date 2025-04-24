@@ -13,10 +13,10 @@ import Login from "./routes/Login.jsx";
 import SignUp from "./routes/SignUp.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
-import Overview from "./routes/overview.jsx";
-import AddCashier from "./routes/addCashier.jsx";
-import AddProduct from "./routes/addProduct.jsx";
-import ViewCashiers from "./routes/viewCashiers.jsx";
+import Overview    from "./routes/Overview.jsx";
+import AddCashier  from "./routes/AddCashier.jsx";
+import AddProduct  from "./routes/AddProduct.jsx";
+import ViewCashiers from "./routes/ViewCashiers.jsx";
 // …import other dashboard pages here
 
 const token = localStorage.getItem("authToken");

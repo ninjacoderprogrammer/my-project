@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import "./Dashboard.css";
+import "../component/Dashboard/Dashboard.css";
+
 
 export default function Dashboard() {
   return (

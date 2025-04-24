@@ -17,17 +17,17 @@ const Home = () => {
       
       <div className="features-section">
         <div className="feature-card">
-          <h3>Feature One</h3>
+          <h3>Sales Insight</h3>
           <p>Description.</p>
         </div>
         
         <div className="feature-card">
-          <h3>Feature Two</h3>
+          <h3>Inventory Management</h3>
           <p>Description.</p>
         </div>
         
         <div className="feature-card">
-          <h3>Feature Three</h3>
+          <h3>Remote Access</h3>
           <p>Description.</p>
         </div>
       </div>
