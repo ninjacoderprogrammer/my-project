@@ -15,7 +15,7 @@ const Login = () => {
       .then(result=> {
         console.log("result : ",result)
         if(result.status === 200){
-          navigate('/home')
+          navigate('/dashboard')
         }
         
       })

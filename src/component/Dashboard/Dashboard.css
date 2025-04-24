@@ -1,0 +1,92 @@
+/* Global Styles */
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background: #2d2d2d;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .sidebar h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .sidebar button:hover {
+    background: #3d3d3d;
+  }
+  
+  .sidebar .active {
+    background: #22c55e;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .main-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Cards */
+  .card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card p {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  /* Progress Bar */
+  .progress-container {
+    margin-top: 20px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #444;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress-bar .progress {
+    height: 100%;
+    background: #22c55e;
+    transition: width 0.3s ease-in-out;
+  }
+  

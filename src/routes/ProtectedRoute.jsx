@@ -1,13 +1,13 @@
-import { Navigate, useOutletContext } from "react-router-dom";
+// src/routes/ProtectedRoute.jsx
+import { Navigate, Outlet } from 'react-router-dom';
 
-function ProtectedRoute({ children }) {
-  const [isLoggedIn] = useOutletContext();
-  
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+export default function ProtectedRoute({ isAuthenticated }) {
+  if (!isAuthenticated) {
+    console.log('User not logged in, redirecting to login');
+    return <Navigate to="/login" replace />;
   }
-  
-  return children;
+  return <Outlet />;
 }
+
 
 export default ProtectedRoute;
