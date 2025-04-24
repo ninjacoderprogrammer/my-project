@@ -1,16 +1,26 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import "./Dashboard.css";
 
-function Dashboard() {
-  const [isLoggedIn] = useOutletContext();
-  
+export default function Dashboard() {
   return (
-    <div className="dashboard">
-      <h1>Welcome to Dashboard</h1>
-      <p>Open after logging in</p>
-      {/* Dashboard content here */}
+    <div className="dashboard-container">
+      <aside className="sidebar">
+        <h2>My Supermarket</h2>
+        <NavLink to="overview" end>Overview</NavLink>
+        <NavLink to="add-cashier">Add Cashier</NavLink>
+        <NavLink to="add-product">Add Product</NavLink>
+        <NavLink to="view-cashiers">View Cashiers</NavLink>
+        {/* more links */}
+        <button onClick={() => {
+          localStorage.removeItem("authToken");
+          window.location.href = "/login";
+        }}>Log Out</button>
+      </aside>
+      <main className="main-content">
+        <h1>View Cashier Details</h1>
+        {/* stat cards, progress bar, table as before */}
+        <Outlet />
+      </main>
     </div>
   );
 }
-
-export default Dashboard;

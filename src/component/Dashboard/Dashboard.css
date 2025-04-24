@@ -1,92 +1,134 @@
-/* Global Styles */
-body {
-    background-color: #1a1a1a;
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    width: 250px;
-    background: #2d2d2d;
-    padding: 20px;
-    height: 100vh;
-  }
-  
-  .sidebar h1 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 10px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .sidebar button:hover {
-    background: #3d3d3d;
-  }
-  
-  .sidebar .active {
-    background: #22c55e;
-  }
-  
-  /* Main Content */
-  .main-content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .main-content h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Cards */
-  .card {
-    background: #2d2d2d;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card h3 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .card p {
-    font-size: 22px;
-    font-weight: bold;
-  }
-  
-  /* Progress Bar */
-  .progress-container {
-    margin-top: 20px;
-  }
-  
-  .progress-bar {
-    width: 100%;
-    height: 10px;
-    background: #444;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .progress-bar .progress {
-    height: 100%;
-    background: #22c55e;
-    transition: width 0.3s ease-in-out;
-  }
-  
+/* Dashboard.css */
+
+/* 1. Overall layout */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+/* 2. Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+}
+
+.sidebar a,
+.sidebar button {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidebar a.active,
+.sidebar a:hover,
+.sidebar button:hover {
+  background-color: #1a2733;
+  border-radius: 4px;
+}
+
+/* 3. Main content area */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: #f5f6fa;
+  box-sizing: border-box;
+}
+
+/* 4. Stat cards row */
+.stats-cards {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stats-cards .card {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.stats-cards .card h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.stats-cards .card .value {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+  color: #222;
+}
+
+.stats-cards .card .delta {
+  font-size: 0.9rem;
+}
+
+/* Positive vs negative */
+.stats-cards .card .delta.positive { color: #28a745; }
+.stats-cards .card .delta.negative { color: #dc3545; }
+
+/* 5. Progress bar */
+.progress-container {
+  margin-bottom: 2rem;
+}
+
+.progress-container label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.progress-container .progress {
+  width: 100%;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-container .progress .fill {
+  height: 100%;
+  width: 75%;           /* example percent */
+  background-color: #28a745;
+}
+
+/* 6. Table of cashiers */
+.main-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-content th,
+.main-content td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-content th {
+  background-color: #f0f0f0;
+}
+
+.main-content tr:hover {
+  background-color: #fafafa;
+}
