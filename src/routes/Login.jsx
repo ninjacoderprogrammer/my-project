@@ -10,17 +10,12 @@ const Login = () => {
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-      e.preventDefault()
-      axios.post('http://localhost:3001/login',{email,password})
-      .then(result=> {
-        console.log("result : ",result)
-        if(result.status === 200){
-          navigate('/dashboard')
-        }
-        
-      })
-      .catch(err=> console.log(err))
-  }
+    e.preventDefault();
+  
+    // TEMPORARY: Skip backend, directly go to dashboard
+    navigate('/dashboard');
+  };
+  
   return (
     <form onSubmit={handleSubmit}>
       <div className="login-container">

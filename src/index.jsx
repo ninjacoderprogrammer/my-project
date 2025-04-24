@@ -1,68 +1,53 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import App from "./App.jsx";
-import Home from "./routes/Home.jsx";
-import Contact from "./routes/Contact.jsx";
-import Login from "./routes/Login.jsx";
-import SignUp from "./routes/SignUp.jsx";
-import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-import Dashboard from "./routes/Dashboard.jsx";
-import Overview    from "./routes/Overview.jsx";
-import AddCashier  from "./routes/AddCashier.jsx";
-import AddProduct  from "./routes/AddProduct.jsx";
-import ViewCashiers from "./routes/ViewCashiers.jsx";
-// …import other dashboard pages here
+import App from "./App";
+import Home from "./routes/Home";
+import Contact from "./routes/Contact";
+import Login from "./routes/Login";
+import SignUp from "./routes/SignUp";
+import Dashboard from "./routes/Dashboard";
+import Overview from "./routes/Overview";
+import AddCashier from "./routes/AddCashier";
+import AddProduct from "./routes/AddProduct";
+import ViewCashiers from "./routes/ViewCashiers";
+// Add more routes if needed
 
 const token = localStorage.getItem("authToken");
 const isAuthenticated = Boolean(token);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "home", element: <Home /> },
-      { path: "contact", element: <Contact /> },
-      { path: "login", element: <Login /> },
-      { path: "signup", element: <SignUp /> },
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
 
-      // Protected dashboard
-      {
-        path: "dashboard",
-        element: <ProtectedRoute isAuthenticated={isAuthenticated} />,
-        children: [
-          {
-            element: <Dashboard />,  // renders sidebar + <Outlet/>
-            children: [
-              { index: true, element: <Overview /> },
-              { path: "overview", element: <Overview /> },
-              { path: "add-cashier", element: <AddCashier /> },
-              { path: "add-product", element: <AddProduct /> },
-              { path: "view-cashiers", element: <ViewCashiers /> },
-              // …add more child routes like transactions, sales-by-product, etc.
-              { path: "*", element: <Navigate to="overview" replace /> }
-            ]
-          }
-        ]
-      },
+          {/* Protected Dashboard */}
+          <Route
+            path="dashboard"
+            element={
+              // isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
+              <Dashboard />
+            }
+          >
+          </Route>
+          <Route index element={<Overview />} />
+          <Route path="overview" element={<Overview />} />
+          <Route path="add-cashier" element={<AddCashier />} />
+          <Route path="add-product" element={<AddProduct />} />
+          <Route path="view-cashiers" element={<ViewCashiers />} />
+          <Route path="*" element={<Navigate to="overview" replace />} />
 
-      // catch-all: redirect unknown to home (or login)
-      { path: "*", element: <Navigate to="/" replace /> }
-    ]
-  }
-]);
-
-ReactDOM
-  .createRoot(document.getElementById("root"))
-  .render(
-    <React.StrictMode>
-      <RouterProvider router={router}/>
-    </React.StrictMode>
-  );
+          {/* Catch-all */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
