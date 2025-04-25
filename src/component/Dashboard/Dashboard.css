@@ -3,26 +3,26 @@
   display: flex;
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5;
+  background-color: #2c2c2c; /* Dark grey background for the dashboard */
 }
 
 /* Sidebar styling */
 .sidebar {
   width: 240px;
-  background-color: #1e1e2f;
-  color: #fff;
+  background-color: #1f1f1f; /* Darker grey for the sidebar */
+  color: #b0b0b0; /* Light grey text color */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 30px 20px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for the sidebar */
 }
 
 /* Sidebar title */
 .sidebar h2 {
   font-size: 1.6rem;
   margin-bottom: 30px;
-  color: #4caf50;
+  color: #d3d3d3; /* Slightly lighter grey for the title */
   text-align: center;
 }
 
@@ -31,16 +31,17 @@
   display: block;
   margin: 10px 0;
   padding: 10px 15px;
-  color: #ccc;
+  color: #a0a0a0; /* Medium grey for links */
   text-decoration: none;
   border-radius: 6px;
   transition: all 0.3s ease;
 }
 
+/* Sidebar link hover and active state */
 .sidebar a:hover,
 .sidebar a.active {
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #3a3a3a; /* Slightly lighter grey for hover/active state */
+  color: #ffffff; /* White text for hover/active state */
   font-weight: bold;
 }
 
@@ -48,16 +49,17 @@
 .logout-button {
   margin-top: auto;
   padding: 12px;
-  background-color: #e53935;
-  color: white;
+  background-color: #3a3a3a; /* Grey background for the button */
+  color: #d3d3d3; /* Light grey text color */
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+/* Logout button hover effect */
 .logout-button:hover {
-  background-color: #d32f2f;
+  background-color: #4a4a4a; /* Slightly lighter grey on hover */
 }
 
 /* Main content area */
@@ -65,8 +67,9 @@
   flex: 1;
   padding: 30px;
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: #2e2e2e; /* Dark grey background for the content area */
   border-radius: 10px;
   margin: 20px;
-  box-shadow: 0px 0px 15px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for the content */
+  color: #d3d3d3; /* Light grey text color for content */
 }

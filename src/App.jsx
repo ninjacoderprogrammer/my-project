@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import React, { useState } from "react";
-import NavBar from "./component/navbar/NavBar";
+// import NavBar from "./component/navbar/NavBar";
 import Footer from "./component/nav_footer/Footer";
 
 export default function App() {
@@ -8,11 +8,11 @@ export default function App() {
   const location = useLocation();
 
   // Hide NavBar on the dashboard route
-  const hideNavBar = location.pathname.startsWith("/dashboard");
+  // const hideNavBar = location.pathname.startsWith("/dashboard");
 
   return (
     <>
-      {!hideNavBar && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+      {/* {!hideNavBar && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} */}
       {/* Every child route will render here and has access to [isLoggedIn, setIsLoggedIn] */}
       <Outlet context={[isLoggedIn, setIsLoggedIn]} />
       <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
