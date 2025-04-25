@@ -42,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="add-cashier" element={<AddCashier />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="view-cashiers" element={<ViewCashiers />} />
+          <Route path="sales-insight" element={<salesInsight />} />
           <Route path="*" element={<Navigate to="overview" replace />} />
 
           {/* Catch-all */}
