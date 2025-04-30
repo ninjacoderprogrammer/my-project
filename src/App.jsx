@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Footer from "./component/nav_footer/Footer";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // temporary login with (true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
 
   // Hide NavBar on the dashboard route
