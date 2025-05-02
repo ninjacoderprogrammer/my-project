@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     price NUMERIC NOT NULL,
-    stock INT NOT NULL, -- Add stock column
+    stock INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

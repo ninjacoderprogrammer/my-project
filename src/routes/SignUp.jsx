@@ -74,13 +74,13 @@ const SignupPage = () => {
               onChange={handleChange}
             />
 
-            <label>Role</label>
+            {/* <label>Role</label>
             <select name="role" value={formData.role} onChange={handleChange}>
               <option value="cashier">Cashier</option>
               <option value="admin">Admin</option>
-            </select>
+            </select> */}
 
-            <button type="submit">Create an account</button>
+            <button type="submit">Create an Admin account</button>
           </form>
 
           <div className="social-signup">

@@ -87,6 +87,36 @@
     color: #007BFF;
 }
 
+/* Signup button */
+.signup-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #45a049;
+}
+
+/* Role selection */
+.role-selection {
+  margin: 10px 0;
+}
+
+.role-selection label {
+  margin-right: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.role-selection input[type="radio"] {
+  margin-right: 5px;
+}
+
 /* Animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

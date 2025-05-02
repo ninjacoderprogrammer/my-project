@@ -67,7 +67,7 @@ const PerformPurchase = () => {
     setQuantity('');
     setMessage('');
   };
-
+  
   // Handle purchase submission
   const handlePurchase = async () => {
     if (cart.length === 0) {
