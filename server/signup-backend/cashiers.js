@@ -33,7 +33,7 @@ router.post('/', verifyToken, checkRole('admin'), async (req, res) => {
 // Admin-only route to fetch cashiers
 router.get('/', verifyToken, checkRole('admin'), async (req, res) => {
   try {
-    const cashiers = await pool.query('SELECT id, name, email FROM cashiers');
+    const cashiers = await pool.query('SELECT id, name, email, phone FROM cashiers');
     res.status(200).json(cashiers.rows);
   } catch (error) {
     console.error('Error fetching cashiers:', error);

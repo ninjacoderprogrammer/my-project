@@ -1,0 +1,16 @@
+/* Define global CSS variables */
+:root {
+  /* Color Palette */
+  --color-bg-light: #FFFDFA;      /* Off-white background */
+  --color-bg-cream: #F9F5EA;      /* Cream background */
+  --color-accent-light: #DEEA9D;  /* Light lime green accent */
+  --color-accent: #A0C774;        /* Soft green primary accent */
+  --color-text-dark: #2A2A2A;     /* Dark text color */
+  --color-border-light: #E0E0E0;  /* Light border color */
+
+  /* Spacing and Borders */
+  --border-radius-lg: 12px;       /* Large border radius */
+
+  /* Transitions */
+  --transition-default: all 0.3s ease-in-out; /* Default transition */
+}

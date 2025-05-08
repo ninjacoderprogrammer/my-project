@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../component/Login/LoginCss.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/theme.css'; // Global theme
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin"); // Default role is "admin"
-  const [error, setError] = useState(""); // State to handle error messages
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('admin');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -24,60 +24,61 @@ const Login = () => {
         navigate('/cashier-dashboard');
       }
     } catch (error) {
-      console.error('Login failed:', error);
-      setError('Invalid email or password. Please try again.');
+      setError('Login failed. Please try again.');
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div className="login-container">
-        <div className="login-box">
-          <h2>Login</h2>
-          {error && <p className="error-message">{error}</p>} {/* Display error messages */}
+    <form onSubmit={handleLogin} className="card login-form">
+      <h2 className="form-title">Login</h2>
+      {error && <p className="form-message error">{error}</p>}
+      <input
+        type="text"
+        placeholder="Email"
+        className="input-field"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        className="input-field"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <div className="role-selection">
+        <label>
           <input
-            type="text"
-            placeholder="Email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="radio"
+            name="role"
+            value="admin"
+            checked={role === 'admin'}
+            onChange={(e) => setRole(e.target.value)}
           />
+          Admin
+        </label>
+        <label>
           <input
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="radio"
+            name="role"
+            value="cashier"
+            checked={role === 'cashier'}
+            onChange={(e) => setRole(e.target.value)}
           />
-          <div className="role-selection">
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="admin"
-                checked={role === "admin"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              Admin
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="cashier"
-                checked={role === "cashier"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              Cashier
-            </label>
-          </div>
-          <button type="submit" className="login-button">Login</button>
-          <button type="button" className="forgot-button">Forgot Password</button>
-          <p className="SignUp-link">
-            I'm Not a member! <a href="/SignUp"> Sign Up </a>
-          </p>
-        </div>
+          Cashier
+        </label>
       </div>
+      <button type="submit" className="btn-primary">
+        Login
+      </button>
+      <button type="button" className="btn-secondary">
+        Forgot Password
+      </button>
+      <p className="form-footer">
+        I'm not a member! <a href="/SignUp" className="link">Sign Up</a>
+      </p>
     </form>
   );
 };

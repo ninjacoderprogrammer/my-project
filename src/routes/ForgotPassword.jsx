@@ -1,17 +1,19 @@
 import React from "react";
-import "../component/ForgetPassword/forgat_password.css";
+import "../styles/theme.css"; // Global theme
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   return (
     <div className="forgot-password-container">
-      <div className="forgot-password-box">
-        <h2>Forgot Password</h2>
-        <p>Enter your email to reset your password</p>
+      <div className="card forgot-password-box">
+        <h2 className="form-title">Forgot Password</h2>
+        <p className="form-description">Enter your email to reset your password</p>
         <input type="email" placeholder="Email" className="input-field" />
-        <button className="reset-button">Reset Password</button>
-        <p className="back-to-login">
-          <Link to="/login">Back to Login</Link>
+        <button className="btn-primary">Reset Password</button>
+        <p className="form-footer">
+          <Link to="/login" className="link">
+            Back to Login
+          </Link>
         </p>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import { Outlet, useLocation } from "react-router-dom";
 import React, { useState } from "react";
+import './styles/theme.css';
 // import NavBar from "./component/navbar/NavBar";
 import Footer from "./component/nav_footer/Footer";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const location = useLocation();
-
+  
+  // const location = useLocation();
   // Hide NavBar on the dashboard route
   // const hideNavBar = location.pathname.startsWith("/dashboard");
 

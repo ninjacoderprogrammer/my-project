@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
+import "../styles/theme.css"; // Global theme
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,122 +16,81 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const SalesInsights = () => {
+  // State to store sales data
   const [sales, setSales] = useState([]);
+
+  // State to store top-selling products
   const [topProducts, setTopProducts] = useState([]);
+
+  // State to store date range for filtering sales
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  // State to store error messages
   const [error, setError] = useState("");
 
-  // Fetch all sales data
-  const fetchSales = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/sales", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setSales(response.data);
-    } catch (err) {
-      setError("Failed to fetch sales data. Please try again.");
-    }
-  };
-
-  // Fetch top-selling products
-  const fetchTopProducts = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/sales/top-products", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTopProducts(response.data);
-    } catch (err) {
-      setError("Failed to fetch top-selling products. Please try again.");
-    }
-  };
-
-  // Filter sales by date
-  const filterSalesByDate = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/sales/filter", {
-        headers: { Authorization: `Bearer ${token}` },
-        params: { start_date: startDate, end_date: endDate },
-      });
-      setSales(response.data);
-    } catch (err) {
-      setError("Failed to filter sales data. Please try again.");
-    }
-  };
-
+  // Fetch sales data and top-selling products when the component mounts
   useEffect(() => {
-    fetchSales();
-    fetchTopProducts();
+    const fetchSales = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        const response = await axios.get("http://localhost:5000/api/sales", {
+          headers: { Authorization: `Bearer ${token}` }, // Pass the token in the request headers
+        });
+        setSales(response.data); // Update the sales state with the fetched data
+      } catch (err) {
+        setError("Failed to fetch sales data. Please try again."); // Set error message if the request fails
+      }
+    };
+
+    const fetchTopProducts = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        const response = await axios.get("http://localhost:5000/api/sales/top-products", {
+          headers: { Authorization: `Bearer ${token}` }, // Pass the token in the request headers
+        });
+        setTopProducts(response.data); // Update the topProducts state with the fetched data
+      } catch (err) {
+        setError("Failed to fetch top-selling products. Please try again."); // Set error message if the request fails
+      }
+    };
+
+    fetchSales(); // Fetch sales data
+    fetchTopProducts(); // Fetch top-selling products
   }, []);
 
-  // Prepare data for the chart
+  // Prepare data for the bar chart
   const chartData = {
-    labels: topProducts.map((product) => product.name),
+    labels: topProducts.map((product) => product.name), // Use product names as labels
     datasets: [
       {
-        label: "Total Quantity Sold",
-        data: topProducts.map((product) => product.total_quantity),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
+        label: "Total Quantity Sold", // Label for the dataset
+        data: topProducts.map((product) => product.total_quantity), // Use total quantities as data points
+        backgroundColor: "rgba(75, 192, 192, 0.6)", // Bar color
+        borderColor: "rgba(75, 192, 192, 1)", // Border color
+        borderWidth: 1, // Border width
       },
     ],
   };
 
   return (
-    <div className="sales-insights-container">
-      <h2>Sales Insights</h2>
-      {error && <p className="error-message">{error}</p>}
+    <div className="container">
+      {/* Page title */}
+      <h2 className="form-title">Sales Insights</h2>
 
-      {/* Date Filter Form */}
-      <form onSubmit={filterSalesByDate}>
-        <label>Start Date:</label>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          required
-        />
-        <label>End Date:</label>
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          required
-        />
-        <button type="submit">Filter</button>
-      </form>
+      {/* Display error message if any */}
+      {error && <p className="form-message error">{error}</p>}
 
-      {/* Sales Table */}
-      <h3>Sales Data</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Product ID</th>
-            <th>Total Quantity</th>
-            <th>Total Revenue</th>
-            <th>Sales Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sales.map((sale) => (
-            <tr key={sale.id}>
-              <td>{sale.product_id}</td>
-              <td>{sale.total_quantity}</td>
-              <td>${(Number(sale.total_revenue) || 0).toFixed(2)}</td> {/* Convert to number */}
-              <td>{new Date(sale.sales_date).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Top-Selling Products */}
-      <h3>Top-Selling Products</h3>
-      <Bar data={chartData} options={{ responsive: true, plugins: { legend: { position: "top" } } }} />
+      {/* Render the bar chart */}
+      <Bar
+        data={chartData}
+        options={{
+          responsive: true, // Make the chart responsive
+          plugins: {
+            legend: { position: "top" }, // Position the legend at the top
+          },
+        }}
+      />
     </div>
   );
 };

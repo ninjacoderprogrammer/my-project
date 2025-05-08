@@ -7,6 +7,7 @@ const ProductManagement = () => {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
   const [message, setMessage] = useState('');
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,10 +36,12 @@ const ProductManagement = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessage('Product added successfully!');
-      setProducts([...products, response.data]); // Add the new product to the list
+      // Add the new product to the list
+      setProducts([...products, response.data]); 
       setName('');
       setPrice('');
       setStock('');
+      setCategory('');
     } catch (error) {
       console.error('Error adding product:', error);
       setMessage('Failed to add product. Please try again.');
@@ -68,6 +71,13 @@ const ProductManagement = () => {
           type="number"
           value={stock}
           onChange={(e) => setStock(e.target.value)}
+          required
+        />
+        <label>Category:</label>
+        <input
+          type="text"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           required
         />
         <button type="submit">Add Product</button>
