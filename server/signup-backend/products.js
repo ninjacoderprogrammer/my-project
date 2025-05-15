@@ -4,10 +4,10 @@ const verifyToken = require('./middleware/authMiddleware');
 const checkRole = require('./middleware/roleMiddleware');
 const router = express.Router();
 
-//test route
-router.get('/test', (req, res) => {
-    res.status(200).json({ message: 'Products route is working!' });
-  });
+// //test route
+// router.get('/test', (req, res) => {
+//     res.status(200).json({ message: 'Products route is working!' });
+//   });
 
 // Admin-only route to add a product
 router.post('/', verifyToken, checkRole('admin'), async (req, res) => {

@@ -21,8 +21,8 @@ import RequireRole from "./hoc/RequireRole";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
+      <Routes> 
+        // Public Routes
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="signup" element={<SignUp />} />
         </Route>
 
-        {/* Admin Dashboard */}
+       // Admin Dashboard
         <Route
           path="dashboard"
           element={

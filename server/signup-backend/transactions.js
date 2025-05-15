@@ -5,59 +5,67 @@ const router = express.Router();
 
 // Record a Transaction
 router.post('/', verifyToken, async (req, res) => {
-  const { product_id, quantity } = req.body;
+  const { items } = req.body;
 
-  // Validate the request body
-  if (!product_id || !quantity) {
-    return res.status(400).json({ error: 'Product ID and quantity are required.' });
-  }
-
-  if (typeof quantity !== 'number' || quantity <= 0) {
-    return res.status(400).json({ error: 'Quantity must be a positive number.' });
-  }
-
+  // processing multiple items 
   try {
-    // Verify that the product exists
-    const product = await pool.query('SELECT * FROM products WHERE id = $1', [product_id]);
-    if (product.rows.length === 0) {
-      return res.status(404).json({ error: 'Product not found.' });
-    }
+    items.map(async (item) => {
+      const { id: product_id, quantity } = item;
 
-    const productDetails = product.rows[0];
-    if (productDetails.stock < quantity) {
-      return res.status(400).json({ error: 'Insufficient stock.' });
-    }
+      // Validate the request body
+      if (!product_id || !quantity) {
+        return res.status(400).json({ error: 'Product ID and quantity are required.' });
+      }
 
-    const total_price = productDetails.price * quantity;
+      if (typeof quantity !== 'number' || quantity <= 0) {
+        return res.status(400).json({ error: 'Quantity must be a positive number.' });
+      }
 
-    // Deduct stock
-    await pool.query('UPDATE products SET stock = stock - $1 WHERE id = $2', [quantity, product_id]);
+      // Verify that the product exists
+      const product = await pool.query('SELECT * FROM products WHERE id = $1', [product_id]);
+      if (product.rows.length === 0) {
+        return res.status(404).json({ error: 'Product not found.' });
+      }
 
-    // Insert into transactions table
-    const newTransaction = await pool.query(
-      'INSERT INTO transactions (product_id, quantity, total_price) VALUES ($1, $2, $3) RETURNING *',
-      [product_id, quantity, total_price]
-    );
+      const productDetails = product.rows[0];
+      if (productDetails.stock < quantity) {
+        return res.status(400).json({ error: 'Insufficient stock.' });
+      }
 
-    // Update sales table
-    console.log('Updating sales table with:', product_id, quantity, total_price);
-    await pool.query(
-      `INSERT INTO sales (product_id, total_quantity, total_revenue, sales_date)
+      const total_price = productDetails.price * quantity;
+
+      // Deduct stock
+      await pool.query('UPDATE products SET stock = stock - $1 WHERE id = $2', [quantity, product_id]);
+
+      // Insert into transactions table
+      const newTransaction = await pool.query(
+        'INSERT INTO transactions (product_id, quantity, total_price) VALUES ($1, $2, $3) RETURNING *',
+        [product_id, quantity, total_price]
+      );
+
+      // Update sales table
+      console.log('Updating sales table with:', product_id, quantity, total_price);
+      await pool.query(
+        `INSERT INTO sales (product_id, total_quantity, total_revenue, sales_date)
        VALUES ($1, $2, $3, CURRENT_DATE)
        ON CONFLICT (product_id, sales_date)
        DO UPDATE SET
          total_quantity = sales.total_quantity + $2,
          total_revenue = sales.total_revenue + $3`,
-      [product_id, quantity, total_price]
-    );
-    console.log('Sales table updated successfully');
+        [product_id, quantity, total_price]
+      );
+      console.log('Sales table updated successfully');
 
-    res.status(201).json({ message: 'Transaction recorded successfully', transaction: newTransaction.rows[0] });
+
+
+
+    })
+    res.status(201).json({ message: 'Transaction recorded successfully' });
   } catch (error) {
     console.error('Error recording transaction:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-});
+})
 
 // Get All Transactions
 router.get('/', verifyToken, async (req, res) => {

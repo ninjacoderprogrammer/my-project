@@ -43,15 +43,29 @@ router.get('/sales/filter', verifyToken, async (req, res) => {
 router.post('/sales/update', verifyToken, async (req, res) => {
   const { product_id, quantity, total_price } = req.body;
   try {
+    // First get product name and category
+    const productInfo = await pool.query(
+      `SELECT name, category FROM products WHERE id = $1`,
+      [product_id]
+    );
+    
+    if (productInfo.rows.length === 0) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    
+    const { name, category } = productInfo.rows[0];
+    
     console.log('Updating sales table with:', product_id, quantity, total_price);
     await pool.query(
-      `INSERT INTO sales (product_id, total_quantity, total_revenue, sales_date)
-       VALUES ($1, $2, $3, CURRENT_DATE)
+      `INSERT INTO sales (product_id, total_quantity, total_revenue, sales_date, product_name, product_category)
+       VALUES ($1, $2, $3, CURRENT_DATE, $4, $5)
        ON CONFLICT (product_id, sales_date)
        DO UPDATE SET
          total_quantity = sales.total_quantity + $2,
-         total_revenue = sales.total_revenue + $3`,
-      [product_id, quantity, total_price]
+         total_revenue = sales.total_revenue + $3,
+         product_name = $4,
+         product_category = $5`,
+      [product_id, quantity, total_price, name, category]
     );
     console.log('Sales table updated successfully');
     res.status(200).json({ message: 'Sales table updated successfully' });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
-import "../styles/theme.css"; // Global theme
+import "../styles/theme.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,8 +26,11 @@ const SalesInsights = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  // State to store error messages
-  const [error, setError] = useState("");
+  // State to store error messages (separated by source)
+  const [errors, setErrors] = useState({});
+  
+  // State to track loading status
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch sales data and top-selling products when the component mounts
   useEffect(() => {
@@ -39,19 +42,33 @@ const SalesInsights = () => {
         });
         setSales(response.data); // Update the sales state with the fetched data
       } catch (err) {
-        setError("Failed to fetch sales data. Please try again."); // Set error message if the request fails
+        console.error("Sales fetch error:", err); // Log detailed error to console
+        setErrors(prev => ({ ...prev, sales: "Failed to fetch sales data. Please try again." })); // Set error message if the request fails
       }
     };
 
     const fetchTopProducts = async () => {
       try {
         const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        console.log("Fetching top products with token:", token ? "Token exists" : "No token"); // Debug token existence
+        
         const response = await axios.get("http://localhost:5000/api/sales/top-products", {
           headers: { Authorization: `Bearer ${token}` }, // Pass the token in the request headers
         });
-        setTopProducts(response.data); // Update the topProducts state with the fetched data
+        
+        console.log("Top products response:", response.data); // Log the response data for debugging
+        
+        if (response.data && Array.isArray(response.data)) {
+          setTopProducts(response.data); // Update the topProducts state with the fetched data
+        } else {
+          console.error("Invalid top products data format:", response.data); // Log error for non-array data
+          setErrors(prev => ({ ...prev, topProducts: "Received invalid data format for top products." }));
+        }
       } catch (err) {
-        setError("Failed to fetch top-selling products. Please try again."); // Set error message if the request fails
+        console.error("Top products fetch error:", err.response || err); // Log detailed error to console
+        setErrors(prev => ({ ...prev, topProducts: "Failed to fetch top-selling products. Please try again." })); // Set error message if the request fails
+      } finally {
+        setIsLoading(false); // Set loading to false regardless of outcome
       }
     };
 
@@ -78,19 +95,31 @@ const SalesInsights = () => {
       {/* Page title */}
       <h2 className="form-title">Sales Insights</h2>
 
-      {/* Display error message if any */}
-      {error && <p className="form-message error">{error}</p>}
+      {/* Display error messages if any */}
+      {errors.sales && <p className="form-message error">{errors.sales}</p>}
+      {errors.topProducts && <p className="form-message error">{errors.topProducts}</p>}
 
-      {/* Render the bar chart */}
-      <Bar
-        data={chartData}
-        options={{
-          responsive: true, // Make the chart responsive
-          plugins: {
-            legend: { position: "top" }, // Position the legend at the top
-          },
-        }}
-      />
+      {/* Show loading indicator or content based on loading state */}
+      {isLoading ? (
+        <p>Loading sales data...</p>
+      ) : (
+        <>
+          {/* Only render the chart when we have data */}
+          {topProducts.length > 0 ? (
+            <Bar
+              data={chartData}
+              options={{
+                responsive: true, // Make the chart responsive
+                plugins: {
+                  legend: { position: "top" }, // Position the legend at the top
+                },
+              }}
+            />
+          ) : (
+            <p>No product data available to display chart.</p> // Fallback message when no data is available
+          )}
+        </>
+      )}
     </div>
   );
 };
