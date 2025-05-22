@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/theme.css'; // Global theme
+// import '../styles/theme.css'; // Global theme
+import '../component/Login/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,8 +15,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password, role });
-      localStorage.setItem('token', response.data.token); // Save the token
-      localStorage.setItem('role', response.data.role); // Save the user's role
+      // Save the token
+      localStorage.setItem('token', response.data.token);
+      // Save the user's role
+      localStorage.setItem('role', response.data.role); 
 
       // Redirect based on role
       if (response.data.role === 'admin') {
@@ -77,7 +80,9 @@ const Login = () => {
         Forgot Password
       </button>
       <p className="form-footer">
-        I'm not a member! <a href="/SignUp" className="link">Sign Up</a>
+        I'm not a member! <a href="/SignUp" className="link"><b>Sign Up</b></a>
+        <span style={{ margin: '0 8px' }}>|</span>
+        <a href="/" className="link"><b>Home</b></a>
       </p>
     </form>
   );

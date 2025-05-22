@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import "../styles/theme.css"; // Global theme
+import '../component/Home/Home.css';
 
 export default function Dashboard() {
   return (

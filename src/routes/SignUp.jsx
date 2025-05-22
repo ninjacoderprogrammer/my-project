@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/theme.css'; // Global theme
+import '../styles/theme.css';
+import '../component/signup/signup.css';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -79,6 +80,11 @@ const SignupPage = () => {
       <button type="submit" className="btn-primary">
         Sign Up
       </button>
+      <p className="form-footer">
+        I'm already a member. <a href="/Login" className="link"><b>Login</b></a>
+        <span style={{ margin: '0 8px' }}>|</span>
+        <a href="/" className="link"><b>Home</b></a>
+      </p>
     </form>
   );
 };
