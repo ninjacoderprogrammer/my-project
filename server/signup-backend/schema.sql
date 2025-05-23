@@ -33,8 +33,18 @@ CREATE TABLE IF NOT EXISTS transactions (
     product_id INT REFERENCES products(id) ON DELETE CASCADE,
     quantity INT NOT NULL,
     total_price NUMERIC(10, 2) NOT NULL,
-    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    customer_name VARCHAR(255),
+    customer_phone VARCHAR(20) 
 );
+
+-- Consider creating a separate 'bills' or 'orders' table if a single transaction involves multiple products.
+-- If a transaction always means one product line, then adding customer details here is fine.
+-- If a 'transaction' in your current setup represents a single item in a larger bill, 
+-- you might need a new table for overall bill details (bill_id, customer_name, customer_phone, total_amount, date)
+-- and then link items from the current 'transactions' table to that bill_id.
+
+-- For now, I'm adding to the existing transactions table as requested.
 
 -- 5. Sales Table
 CREATE TABLE IF NOT EXISTS sales (

@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Record a Transaction
 router.post('/', verifyToken, async (req, res) => {
-  const { items } = req.body;
+  const { items, customer_name, customer_phone } = req.body; // Added customer_name and customer_phone
 
   if (!items || !Array.isArray(items) || items.length === 0) {
     return res.status(400).json({ error: 'Items array is required and cannot be empty.' });
@@ -92,6 +92,8 @@ router.post('/', verifyToken, async (req, res) => {
       bill: {
         bill_id: billId, // Or generate a more robust unique bill ID
         bill_date: billDate, // This will be the timestamp of the last item's transaction record
+        customer_name: customer_name || 'N/A', // Include customer name
+        customer_phone: customer_phone || 'N/A', // Include customer phone
         items: billItems,
         grand_total: grandTotal,
       }

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import '../styles/theme.css'; // Assuming you have a theme file
-import './print-bill.css'; // We'll create this for bill-specific styles
+import '../component/print-bill/print-bill.css'; // We'll create this for bill-specific styles
 
 const PrintBill = () => {
   const location = useLocation();
@@ -24,7 +24,7 @@ const PrintBill = () => {
     );
   }
 
-  const { bill_id, bill_date, items, grand_total } = billDetails;
+  const { bill_id, bill_date, items, grand_total, customer_name, customer_phone } = billDetails;
 
   const handlePrint = () => {
     window.print();
@@ -157,6 +157,8 @@ const PrintBill = () => {
         <section className="bill-info">
           <p><strong>Bill ID:</strong> {bill_id || 'N/A'}</p>
           <p><strong>Date:</strong> {formattedBillDate}</p>
+          <p><strong>Customer Name:</strong> {customer_name || 'N/A'}</p>
+          <p><strong>Customer Phone:</strong> {customer_phone || 'N/A'}</p>
         </section>
 
         <section className="bill-items">

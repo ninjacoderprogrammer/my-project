@@ -9,6 +9,8 @@ const PerformPurchase = () => {
   const [quantity, setQuantity] = useState('');
   const [cart, setCart] = useState([]); // Cart state
   const [message, setMessage] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
 
   // Fetch product list
   useEffect(() => {
@@ -76,12 +78,28 @@ const PerformPurchase = () => {
       setMessage('Your cart is empty.');
       return;
     }
+    // Basic validation for customer details (optional, but good practice)
+    if (!customerName.trim()) {
+      setMessage("Please enter the customer's name.");
+      return;
+    }
+    // Phone validation: allow digits, spaces, +, -, ()
+    // Allow empty phone number as it's optional
+    if (customerPhone.trim() && !/^[\d\s()+-]*$/.test(customerPhone)) {
+        setMessage('Please enter a valid customer phone number (digits, spaces, +, -, () allowed).');
+        return;
+    }
+
 
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
         'http://localhost:5000/api/transactions',
-        { items: cart },
+        { 
+          items: cart,
+          customer_name: customerName,
+          customer_phone: customerPhone
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -108,6 +126,31 @@ const PerformPurchase = () => {
   return (
     <div>
       <h1>Perform Purchase</h1>
+
+      {/* Customer Details Inputs */}
+      <div style={{ marginBottom: '20px' }}>
+        <div>
+          <label htmlFor="customerName">Customer Name: </label>
+          <input
+            type="text"
+            id="customerName"
+            value={customerName}
+            onChange={(e) => setCustomerName(e.target.value)}
+            placeholder="Enter customer name"
+            required 
+          />
+        </div>
+        <div style={{ marginTop: '10px' }}>
+          <label htmlFor="customerPhone">Customer Phone: </label>
+          <input
+            type="tel"
+            id="customerPhone"
+            value={customerPhone}
+            onChange={(e) => setCustomerPhone(e.target.value)}
+            placeholder="Enter customer phone (optional)"
+          />
+        </div>
+      </div>
 
       {/* Product Selection */}
       <div>
