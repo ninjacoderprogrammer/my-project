@@ -16,81 +16,97 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const SalesInsights = () => {
-  // State to store sales data
-  const [sales, setSales] = useState([]);
+  // State to store sales data (currently unused, consider if needed for other features)
+  // const [sales, setSales] = useState([]); 
 
-  // State to store top-selling products
   const [topProducts, setTopProducts] = useState([]);
-
-  // State to store date range for filtering sales
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
-  // State to store error messages (separated by source)
   const [errors, setErrors] = useState({});
-  
-  // State to track loading status
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // Start with loading true
 
   // Function to fetch top products, optionally filtered by date
   const fetchTopProductsData = async (startDateFilter, endDateFilter) => {
     setIsLoading(true);
+    setErrors(prev => ({ ...prev, topProducts: null })); // Clear previous top products error
     try {
       const token = localStorage.getItem("token");
       let url = "http://localhost:5000/api/sales/top-products";
       const params = {};
-      if (startDateFilter && endDateFilter) {
+      if (startDateFilter) {
         params.start_date = startDateFilter;
+      }
+      if (endDateFilter) {
         params.end_date = endDateFilter;
       }
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
-        params,
+        params, // Send params object directly
       });
 
       if (response.data && Array.isArray(response.data)) {
         setTopProducts(response.data);
+        if (response.data.length === 0) {
+          setErrors(prev => ({ ...prev, topProducts: "No products found for the selected criteria." }));
+        }
       } else {
+        setTopProducts([]); // Clear data on invalid format
         setErrors(prev => ({ ...prev, topProducts: "Received invalid data format for top products." }));
       }
     } catch (err) {
       console.error("Top products fetch error:", err.response || err);
-      setErrors(prev => ({ ...prev, topProducts: "Failed to fetch top-selling products. Please try again." }));
+      setTopProducts([]); // Clear data on error
+      let errorMessage = "Failed to fetch top-selling products. Please try again.";
+      if (err.response && err.response.data && err.response.data.message) {
+        errorMessage = err.response.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      setErrors(prev => ({ ...prev, topProducts: errorMessage }));
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Fetch sales data and initial top-selling products when the component mounts
   useEffect(() => {
-    const fetchSales = async () => {
-      try {
-        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
-        const response = await axios.get("http://localhost:5000/api/sales", {
-          headers: { Authorization: `Bearer ${token}` }, // Pass the token in the request headers
-        });
-        setSales(response.data); // Update the sales state with the fetched data
-      } catch (err) {
-        console.error("Sales fetch error:", err); // Log detailed error to console
-        setErrors(prev => ({ ...prev, sales: "Failed to fetch sales data. Please try again." })); // Set error message if the request fails
-      }
-    };
+    const today = new Date();
+    const thirtyDaysAgo = new Date(new Date().setDate(today.getDate() - 30));
+    const defaultStartDate = thirtyDaysAgo.toISOString().split('T')[0];
+    const defaultEndDate = today.toISOString().split('T')[0];
+    
+    setStartDate(defaultStartDate);
+    setEndDate(defaultEndDate);
 
-    fetchSales(); // Fetch sales data
-    fetchTopProductsData(); // Fetch initial top-selling products without filters
+    fetchTopProductsData(defaultStartDate, defaultEndDate);
   }, []);
 
-  // Handle filter application
   const handleFilter = () => {
-    if (startDate && endDate) {
-      fetchTopProductsData(startDate, endDate);
+    if (!startDate || !endDate) {
+      setErrors(prev => ({ ...prev, topProducts: "Please select both a start and end date."}));
+      return;
     }
+    if (new Date(startDate) > new Date(endDate)) {
+      setErrors(prev => ({ ...prev, topProducts: "Start date cannot be after end date."}));
+      return;
+    }
+    fetchTopProductsData(startDate, endDate);
+  };
+  
+  const handleClearFilters = () => {
+    const today = new Date();
+    const thirtyDaysAgo = new Date(new Date().setDate(today.getDate() - 30));
+    const defaultStartDate = thirtyDaysAgo.toISOString().split('T')[0];
+    const defaultEndDate = today.toISOString().split('T')[0];
+    
+    setStartDate(defaultStartDate);
+    setEndDate(defaultEndDate);
+    setErrors(prev => ({ ...prev, topProducts: null }));
+    fetchTopProductsData(defaultStartDate, defaultEndDate);
   };
 
-  // Prepare data for the bar chart
   const chartData = {
-    labels: topProducts.map((product) => product.name), // Use product names as labels
+    labels: topProducts.map((product) => product.name || 'Unnamed Product'), // Ensure name exists
     datasets: [
       {
         label: "Total Quantity Sold", // Label for the dataset
@@ -132,16 +148,23 @@ const SalesInsights = () => {
           onChange={(e) => setEndDate(e.target.value)} 
           style={{ marginRight: '10px' }}
         />
-        <button onClick={handleFilter} disabled={!startDate || !endDate}>
+        <button onClick={handleFilter} disabled={!startDate || !endDate || isLoading}>
           Apply Filter
+        </button>
+        <button onClick={handleClearFilters} disabled={isLoading} style={{ marginLeft: '10px' }}>
+          Clear Filters & Show Last 30 Days
         </button>
       </div>
 
-      {/* Display error messages if any */}
-      {errors.sales && <p className="form-message error">{errors.sales}</p>}
-      {errors.topProducts && <p className="form-message error">{errors.topProducts}</p>}
+      {errors.topProducts && 
+        <p 
+          className="form-message error" 
+          style={{ color: topProducts.length === 0 && errors.topProducts === "No products found for the selected criteria." ? 'orange' : 'red' }}
+        >
+          {errors.topProducts}
+        </p>
+      }
 
-      {/* Show loading indicator or content based on loading state */}
       {isLoading ? (
         <p>Loading sales data...</p>
       ) : (
@@ -158,7 +181,8 @@ const SalesInsights = () => {
               }}
             />
           ) : (
-            <p>No product data available to display chart.</p> // Fallback message when no data is available
+            !isLoading && !errors.topProducts && topProducts.length === 0 && 
+            <p>No product data available to display chart for the current selection.</p>
           )}
         </>
       )}

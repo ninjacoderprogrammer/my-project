@@ -15,6 +15,7 @@ import ProductManagement from "./routes/ProductManagement";
 import SalesInsights from "./routes/SalesInsight";
 import ViewStock from "./routes/ViewStock";
 import PerformPurchase from "./routes/PerformPurchase";
+import PrintBill from "./routes/print-bill"; // Import the new PrintBill component
 import RequireAuth from "./hoc/RequireAuth";
 import RequireRole from "./hoc/RequireRole";
 
@@ -22,7 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes> 
-        // Public Routes
+        {/* Public Routes */}
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
@@ -31,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="signup" element={<SignUp />} />
         </Route>
 
-       // Admin Dashboard
+       {/* Admin Dashboard */}
         <Route
           path="dashboard"
           element={
@@ -71,8 +72,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </RequireAuth>
           }
         >
+          {/* Redirect cashier to Perform Purchase by default */}
+          <Route index element={<Navigate to="perform-purchase" replace />} /> 
           <Route path="view-stock" element={<ViewStock />} />
           <Route path="perform-purchase" element={<PerformPurchase />} />
+          <Route path="print-bill" element={<PrintBill />} /> {/* Add route for PrintBill */}
         </Route>
 
         {/* Catch-All Route */}

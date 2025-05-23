@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const PerformPurchase = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -83,9 +85,20 @@ const PerformPurchase = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      setMessage(response.data.message || 'Purchase successful!');
-      setCart([]); // Clear the cart
-      window.location.reload(); // Refresh the page to update stock
+      // setMessage(response.data.message || 'Purchase successful!');
+      // setCart([]); // Clear the cart
+      // window.location.reload(); // Refresh the page to update stock
+
+      if (response.data && response.data.bill) {
+        // Navigate to the print bill page with bill data
+        navigate('/cashier-dashboard/print-bill', { state: { bill: response.data.bill } });
+      } else {
+        // Fallback if bill data is not in response, though it should be
+        setMessage(response.data.message || 'Purchase successful! Bill data missing.');
+        setCart([]);
+        // Optionally, still refresh or redirect to a generic success page
+      }
+
     } catch (error) {
       console.error('Error performing purchase:', error.response?.data || error.message);
       setMessage(error.response?.data?.error || 'Purchase failed. Please try again.');
