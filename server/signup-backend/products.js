@@ -11,12 +11,13 @@ const router = express.Router();
 
 // Admin-only route to add a product
 router.post('/', verifyToken, checkRole('admin'), async (req, res) => {
-  const { name, price, stock } = req.body;
+  const { name, price, stock, category } = req.body; // Add category here
 
   try {
     const newProduct = await pool.query(
-      'INSERT INTO products (name, price, stock) VALUES ($1, $2, $3) RETURNING *',
-      [name, price, stock]
+      // Add category to INSERT
+      'INSERT INTO products (name, price, stock, category) VALUES ($1, $2, $3, $4) RETURNING *',
+      [name, price, stock, category] // Add category to parameters
     );
     res.status(201).json(newProduct.rows[0]);
   } catch (error) {
@@ -83,6 +84,22 @@ router.delete('/:id', verifyToken, async (req, res) => {
     res.status(200).json({ message: 'Product deleted successfully', product: deletedProduct.rows[0] });
   } catch (error) {
     console.error('Error deleting product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Get specific products by IDs (Cashier-only route)
+router.get('/specific', verifyToken, checkRole('cashier'), async (req, res) => {
+  const productIds = [17, 18, 19, 20]; // Example product IDs
+
+  try {
+    const products = await pool.query(
+      'SELECT id, name, category FROM products WHERE id IN ($1, $2, $3, $4)',
+      productIds
+    );
+    res.status(200).json(products.rows);
+  } catch (error) {
+    console.error('Error fetching specific products:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

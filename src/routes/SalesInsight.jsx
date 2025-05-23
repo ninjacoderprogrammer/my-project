@@ -32,7 +32,37 @@ const SalesInsights = () => {
   // State to track loading status
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch sales data and top-selling products when the component mounts
+  // Function to fetch top products, optionally filtered by date
+  const fetchTopProductsData = async (startDateFilter, endDateFilter) => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      let url = "http://localhost:5000/api/sales/top-products";
+      const params = {};
+      if (startDateFilter && endDateFilter) {
+        params.start_date = startDateFilter;
+        params.end_date = endDateFilter;
+      }
+
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+        params,
+      });
+
+      if (response.data && Array.isArray(response.data)) {
+        setTopProducts(response.data);
+      } else {
+        setErrors(prev => ({ ...prev, topProducts: "Received invalid data format for top products." }));
+      }
+    } catch (err) {
+      console.error("Top products fetch error:", err.response || err);
+      setErrors(prev => ({ ...prev, topProducts: "Failed to fetch top-selling products. Please try again." }));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch sales data and initial top-selling products when the component mounts
   useEffect(() => {
     const fetchSales = async () => {
       try {
@@ -47,34 +77,16 @@ const SalesInsights = () => {
       }
     };
 
-    const fetchTopProducts = async () => {
-      try {
-        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
-        console.log("Fetching top products with token:", token ? "Token exists" : "No token"); // Debug token existence
-        
-        const response = await axios.get("http://localhost:5000/api/sales/top-products", {
-          headers: { Authorization: `Bearer ${token}` }, // Pass the token in the request headers
-        });
-        
-        console.log("Top products response:", response.data); // Log the response data for debugging
-        
-        if (response.data && Array.isArray(response.data)) {
-          setTopProducts(response.data); // Update the topProducts state with the fetched data
-        } else {
-          console.error("Invalid top products data format:", response.data); // Log error for non-array data
-          setErrors(prev => ({ ...prev, topProducts: "Received invalid data format for top products." }));
-        }
-      } catch (err) {
-        console.error("Top products fetch error:", err.response || err); // Log detailed error to console
-        setErrors(prev => ({ ...prev, topProducts: "Failed to fetch top-selling products. Please try again." })); // Set error message if the request fails
-      } finally {
-        setIsLoading(false); // Set loading to false regardless of outcome
-      }
-    };
-
     fetchSales(); // Fetch sales data
-    fetchTopProducts(); // Fetch top-selling products
+    fetchTopProductsData(); // Fetch initial top-selling products without filters
   }, []);
+
+  // Handle filter application
+  const handleFilter = () => {
+    if (startDate && endDate) {
+      fetchTopProductsData(startDate, endDate);
+    }
+  };
 
   // Prepare data for the bar chart
   const chartData = {
@@ -87,6 +99,13 @@ const SalesInsights = () => {
         borderColor: "rgba(75, 192, 192, 1)", // Border color
         borderWidth: 1, // Border width
       },
+      {
+        label: "Total Revenue", // Label for the revenue dataset
+        data: topProducts.map((product) => product.total_revenue), // Use total revenues as data points
+        backgroundColor: "rgba(160, 199, 116, 0.6)", // Bar color for revenue
+        borderColor: "rgba(160, 199, 116, 1)", // Border color for revenue
+        borderWidth: 1, // Border width for revenue
+      },
     ],
   };
 
@@ -94,6 +113,29 @@ const SalesInsights = () => {
     <div className="container">
       {/* Page title */}
       <h2 className="form-title">Sales Insights</h2>
+
+      {/* Date Filter Inputs */}
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="startDate">Start Date: </label>
+        <input 
+          type="date" 
+          id="startDate" 
+          value={startDate} 
+          onChange={(e) => setStartDate(e.target.value)} 
+          style={{ marginRight: '10px' }}
+        />
+        <label htmlFor="endDate">End Date: </label>
+        <input 
+          type="date" 
+          id="endDate" 
+          value={endDate} 
+          onChange={(e) => setEndDate(e.target.value)} 
+          style={{ marginRight: '10px' }}
+        />
+        <button onClick={handleFilter} disabled={!startDate || !endDate}>
+          Apply Filter
+        </button>
+      </div>
 
       {/* Display error messages if any */}
       {errors.sales && <p className="form-message error">{errors.sales}</p>}

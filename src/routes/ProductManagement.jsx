@@ -92,7 +92,7 @@ const ProductManagement = () => {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            {product.name} - ${product.price} (Stock: {product.stock})
+            {product.name} - ₹{product.price} (Stock: {product.stock})
           </li>
         ))}
       </ul>

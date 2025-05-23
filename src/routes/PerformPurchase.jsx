@@ -103,7 +103,7 @@ const PerformPurchase = () => {
           <option value="">Select a product</option>
           {products.map((product) => (
             <option key={product.id} value={product.id}>
-              {product.name} (Stock: {product.stock}, Price: ${Number(product.price).toFixed(2)})
+              {product.name} (Stock: {product.stock}, Price: ₹{Number(product.price).toFixed(2)})
             </option>
           ))}
         </select>
@@ -139,8 +139,8 @@ const PerformPurchase = () => {
               <tr key={index}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>${item.total.toFixed(2)}</td>
+                <td>₹{item.price.toFixed(2)}</td>
+                <td>₹{item.total.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -151,7 +151,7 @@ const PerformPurchase = () => {
 
       {/* Total Price */}
       <h3>
-        Total Price: $
+        Total Price: ₹
         {cart.reduce((acc, item) => acc + item.total, 0).toFixed(2)}
       </h3>
 

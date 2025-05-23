@@ -37,7 +37,7 @@ const ViewStock = () => {
             <tr key={product.id}>
               <td>{product.name}</td>
               <td>{product.stock}</td>
-              <td>${Number(product.price).toFixed(2)}</td>
+              <td>₹{Number(product.price).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
