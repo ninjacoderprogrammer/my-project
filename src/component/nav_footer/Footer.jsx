@@ -23,7 +23,7 @@ const Footer = ({ isLoggedIn }) => {
         <span className="arrow">{isExpanded ? '▼' : '▲'}</span>
       </div>
       <div className="footer-content">
-        <p>&copy; 2025 MCA Final Year Project</p>
+        <p className="footer-copyright">&copy; 2025 MCA Final Year Project</p>
         <div className="footer-links">
           <a href="/about" className="footer-link">About</a>
           <a href="/contact" className="footer-link">Contact</a>

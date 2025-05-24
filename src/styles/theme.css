@@ -1,33 +1,409 @@
 @import './variables.css';
 
-/* General Reset */
+/* General Reset & Base Styles */
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #FFFDFA, #F9F5EA);
-  color: #2A2A2A;
-  line-height: 1.6;
+  font-family: var(--font-family-sans-serif);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--text-primary); /* Or a specific heading color if defined */
+}
+
+h1 { font-size: calc(var(--font-size-base) * 2.5); }
+h2 { font-size: calc(var(--font-size-base) * 2); }
+h3 { font-size: calc(var(--font-size-base) * 1.75); }
+h4 { font-size: calc(var(--font-size-base) * 1.5); }
+h5 { font-size: calc(var(--font-size-base) * 1.25); }
+h6 { font-size: var(--font-size-base); }
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
 }
 
 a {
+  color: var(--text-link);
   text-decoration: none;
-  color: #2A2A2A;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
+  background-color: transparent;
+  transition: color 0.15s ease-in-out, text-decoration 0.15s ease-in-out;
 }
 
 a:hover {
-  color: #A0C774;
+  color: var(--text-link-hover);
   text-decoration: underline;
 }
 
 /* Containers */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
+  width: 100%;
+  padding-right: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  margin-right: auto;
+  margin-left: auto;
 }
 
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}
+
+/* Cards */
 .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--background-secondary);
+  background-clip: border-box;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.card-header {
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid var(--border-color);
+}
+.card-header:first-child {
+  border-radius: calc(var(--border-radius-lg) - 1px) calc(var(--border-radius-lg) - 1px) 0 0;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: var(--spacing-md);
+}
+
+.card-title {
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-footer {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(0,0,0,.03);
+  border-top: 1px solid var(--border-color);
+}
+.card-footer:last-child {
+  border-radius: 0 0 calc(var(--border-radius-lg) - 1px) calc(var(--border-radius-lg) - 1px);
+}
+
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-weight: var(--font-weight-normal);
+  color: var(--text-on-primary);
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: var(--spacing-sm) var(--spacing-md); /* Adjusted padding */
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  border-radius: var(--border-radius);
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 0, 123, 255), .25); /* Fallback if --primary-color-rgb is not defined */
+}
+/* Define --primary-color-rgb in variables.css if you want to use it for focus rings e.g. --primary-color-rgb: 0,123,255; */
+
+
+.btn-primary {
+  color: var(--text-on-primary);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  color: var(--text-on-primary);
+  background-color: #0069d9; /* Darken primary */
+  border-color: #0062cc;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5); /* Adjust color to match primary */
+}
+
+.btn-secondary {
+  color: var(--text-on-primary); /* Assuming secondary buttons also have light text on dark background */
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  color: var(--text-on-primary);
+  background-color: #5a6268; /* Darken secondary */
+  border-color: #545b62;
+}
+
+.btn-secondary:focus, .btn-secondary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(130,138,145,.5); /* Adjust color to match secondary */
+}
+
+.btn-success {
+  color: #fff;
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+.btn-success:hover {
+  background-color: #1e7e34;
+  border-color: #1c7430;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+.btn-danger:hover {
+  background-color: #bd2130;
+  border-color: #b21f2d;
+}
+
+.btn-warning {
+  color: var(--text-primary); /* Warning buttons often have dark text */
+  background-color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: var(--accent-color); /* Using accent as info */
+  border-color: var(--accent-color);
+}
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+
+.btn-light {
+  color: var(--text-primary);
+  background-color: var(--light-color);
+  border-color: #dae0e5; /* Slightly darker border for light button */
+}
+.btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.btn-dark {
+  color: var(--text-on-dark);
+  background-color: var(--dark-color);
+  border-color: var(--dark-color);
+}
+.btn-dark:hover {
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+
+.btn-link {
+  font-weight: 400;
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+}
+.btn-link:focus, .btn-link.focus {
+  text-decoration: underline;
+  box-shadow: none;
+}
+
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label, label { /* Applied to generic label as well */
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-normal);
+}
+
+.input-field, /* Assuming .input-field is your class for text inputs, selects, textareas */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  height: calc(var(--line-height-base) * 1em + var(--spacing-sm) * 2 + 2px); /* Calculate height based on line-height and padding */
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
+  background-clip: padding-box;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.input-field:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+select:focus,
+textarea:focus {
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
+  border-color: #80bdff; /* A common focus color, can be tied to primary */
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 0 0.2rem rgba(var(--primary-color-rgb, 0, 123, 255), .25);
+}
+
+textarea.input-field, textarea {
+  height: auto; /* Textareas should grow */
+  min-height: calc(var(--line-height-base) * 2em + var(--spacing-sm) * 2 + 2px); /* Example: at least 2 lines */
+}
+
+select.input-field, select {
+  /* Ensure select looks consistent */
+  appearance: none; /* Remove default system appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  background-size: 16px 12px; /* Adjust size as needed */
+  padding-right: calc(var(--spacing-md) + 20px); /* Make space for arrow */
+}
+
+/* Checkboxes and Radios - Basic styling, can be enhanced */
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: var(--spacing-xs);
+  vertical-align: middle;
+}
+
+.form-check-label {
+  margin-bottom: 0; /* Align with Bootstrap */
+}
+
+/* Helper text or messages */
+.form-text {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.form-message { /* From original theme.css, adapt as needed */
+  color: var(--success-color); /* Or var(--danger-color) for errors */
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+}
+
+/* Utility Classes (can be expanded) */
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-left { text-align: left !important; }
+
+.mt-1 { margin-top: var(--spacing-xs) !important; }
+.mb-1 { margin-bottom: var(--spacing-xs) !important; }
+.ml-1 { margin-left: var(--spacing-xs) !important; }
+.mr-1 { margin-right: var(--spacing-xs) !important; }
+/* ... add more for sm, md, lg, xl, xxl and p (padding) ... */
+
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-inline-block { display: inline-block !important; }
+/* ... etc. ... */
+
+/* Ensure the app container takes full height if needed */
+html, body, #root {
+    height: 100%;
+}
+
+/* If you have a main app container inside #root */
+.App {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Example for a main content area to push footer down */
+.main-content {
+    flex: 1;
+}
+
+/*
+  Legacy styles from the original theme.css that might need
+  to be re-evaluated, refactored using new variables, or removed.
+  For now, they are commented out or removed if directly superseded.
+*/
+
+/*
+  Original .card styles were:
   background-color: #FFFDFA;
   border: 1px solid #A0C774;
   border-radius: 12px;
@@ -35,15 +411,11 @@ a:hover {
   padding: 16px;
   margin-bottom: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  NEW .card styles use variables and are more generic.
+*/
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Buttons */
-.btn {
+/*
+  Original .btn styles were:
   display: inline-block;
   padding: 10px 20px;
   font-size: 16px;
@@ -51,31 +423,11 @@ a:hover {
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-}
+  NEW .btn styles use variables and are more comprehensive.
+*/
 
-.btn-primary {
-  background-color: #A0C774;
-  color: #FFFDFA;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #DEEA9D;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #A0C774;
-  border: 2px solid #A0C774;
-}
-
-.btn-secondary:hover {
-  background-color: #A0C774;
-  color: #FFFDFA;
-}
-
-/* Inputs */
-.input-field {
+/*
+  Original .input-field styles were:
   width: 100%;
   padding: 10px;
   border: 1px solid #A0C774;
@@ -83,157 +435,14 @@ a:hover {
   margin-bottom: 16px;
   font-size: 16px;
   transition: border-color 0.3s ease;
-}
+  NEW input styles are more comprehensive and cover various input types.
+*/
 
-.input-field:focus {
-  border-color: #DEEA9D;
-  outline: none;
-}
-
-/* Forms */
-.form-label {
+/*
+  Original .form-label styles were:
   font-weight: bold;
   margin-bottom: 8px;
   display: block;
-}
-
-.form-message {
-  color: #A0C774;
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-/* Headers */
-h1, h2, h3 {
-  color: #2A2A2A;
-  margin-bottom: 16px;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 20px;
-}
-
-/* Sidebar */
-.sidebar {
-  background-color: #A0C774;
-  color: #FFFDFA;
-  padding: 16px;
-  border-radius: 12px;
-  width: 250px;
-  min-height: 100vh;
-  position: fixed;
-}
-
-.sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 12px;
-}
-
-.sidebar ul li a {
-  color: #FFFDFA;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.sidebar ul li a:hover {
-  color: #DEEA9D;
-}
-
-.logout-button {
-  background-color: #FFFDFA;
-  color: #A0C774;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 16px;
-}
-
-.logout-button:hover {
-  background-color: #DEEA9D;
-  color: #FFFDFA;
-}
-
-/* Main Content */
-.main-content {
-  margin-left: 270px;
-  padding: 24px;
-  background-color: #FFFDFA;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Hero Section */
-.hero-section {
-  text-align: center;
-  padding: 50px 20px;
-  background: linear-gradient(to bottom, #FFFDFA, #F9F5EA);
-  border-radius: 12px;
-}
-
-.hero-section h1 {
-  font-size: 48px;
-  color: #2A2A2A;
-}
-
-.hero-section p {
-  font-size: 18px;
-  color: #2A2A2A;
-  margin-bottom: 24px;
-}
-
-.cta-buttons .btn {
-  margin: 0 8px;
-}
-
-/* Feature Cards */
-.features-section {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 40px;
-}
-
-.feature-card {
-  background-color: #FFFDFA;
-  border: 1px solid #A0C774;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 30%;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.feature-card h3 {
-  font-size: 20px;
-  color: #2A2A2A;
-  margin-bottom: 12px;
-}
-
-.feature-card p {
-  font-size: 16px;
-  color: #2A2A2A;
-}
+  NEW label styles are slightly different, using var(--font-weight-normal) by default.
+  If bold labels are always desired, this can be changed back or a .form-label-bold class created.
+*/

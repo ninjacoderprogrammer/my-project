@@ -19,18 +19,23 @@ div {
 }
 
 /* Content area for the Outlet */
-div > *:nth-child(2) {
-  flex: 1;
+.main-content-area {
+  flex: 1; /* Allows the content to grow and push footer down or scroll */
   padding: 2rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  /* Add padding to the bottom to ensure it clears the expanded footer */
+  /* Assuming --footer-expanded-height is defined in variables.css (e.g., 150px) */
+  /* and --spacing-md is also defined (e.g., 1rem) */
+  padding-bottom: calc(var(--footer-expanded-height, 150px) + var(--spacing-md, 1rem) + 2rem); /* Added 2rem extra to existing padding */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  div > *:nth-child(2) {
+  .main-content-area { /* NEW RULE */
     padding: 1rem;
+    padding-bottom: calc(var(--footer-expanded-height, 150px) + var(--spacing-md, 1rem) + 1rem); /* Adjusted for smaller screens */
   }
 }
 

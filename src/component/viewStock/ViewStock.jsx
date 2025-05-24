@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/theme.css"; // Global theme
+import "../../styles/theme.css"; // Global theme
 
 const ViewStock = () => {
   const [products, setProducts] = useState([]);

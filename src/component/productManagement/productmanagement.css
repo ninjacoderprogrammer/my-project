@@ -1,0 +1,237 @@
+/* filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\component\productManagement\productmanagement.css */
+
+.product-management-container {
+    padding: var(--spacing-large);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    margin: var(--spacing-large) auto;
+    max-width: 1200px; /* Or your preferred max-width */
+}
+
+.pm-title {
+    font-size: var(--font-size-xxlarge);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-large);
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+}
+
+.pm-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-large);
+    gap: var(--spacing-medium);
+    flex-wrap: wrap; /* For responsiveness */
+}
+
+.pm-search-input {
+    padding: var(--spacing-small) var(--spacing-medium);
+    border: 1px solid var(--neutral-color-light);
+    border-radius: var(--border-radius-medium);
+    font-size: var(--font-size-medium);
+    width: 300px; /* Adjust as needed */
+    transition: border-color 0.3s ease;
+}
+
+.pm-search-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.pm-add-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: var(--spacing-small) var(--spacing-large);
+    border: none;
+    border-radius: var(--border-radius-medium);
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: var(--font-weight-medium);
+}
+
+.pm-add-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.pm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-large);
+    font-size: var(--font-size-small);
+}
+
+.pm-table th,
+.pm-table td {
+    border: 1px solid var(--neutral-color-light);
+    padding: var(--spacing-medium);
+    text-align: left;
+}
+
+.pm-table th {
+    background-color: var(--neutral-color-lighter);
+    color: var(--text-color-dark);
+    font-weight: var(--font-weight-semibold);
+}
+
+.pm-table tr:nth-child(even) {
+    background-color: var(--neutral-color-extralight);
+}
+
+.pm-table tr:hover {
+    background-color: var(--neutral-color-lightest);
+}
+
+.pm-table .action-buttons button {
+    margin-right: var(--spacing-small);
+    padding: var(--spacing-xsmall) var(--spacing-small);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-size: var(--font-size-xsmall);
+    transition: background-color 0.3s ease;
+}
+
+.pm-edit-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+}
+
+.pm-edit-btn:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+.pm-delete-btn {
+    background-color: var(--error-color);
+    color: var(--text-color-light);
+}
+
+.pm-delete-btn:hover {
+    background-color: var(--error-color-dark);
+}
+
+/* Modal Styles (Basic - consider a dedicated modal component or library for advanced features) */
+.pm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pm-modal-content {
+    background-color: var(--background-color);
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-xlarge);
+    width: 90%;
+    max-width: 500px;
+}
+
+.pm-modal-title {
+    font-size: var(--font-size-xlarge);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-medium);
+    font-weight: var(--font-weight-medium);
+}
+
+.pm-form-group {
+    margin-bottom: var(--spacing-medium);
+}
+
+.pm-form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xsmall);
+    color: var(--text-color-dark);
+    font-weight: var(--font-weight-medium);
+}
+
+.pm-form-group input,
+.pm-form-group textarea,
+.pm-form-group select {
+    width: 100%;
+    padding: var(--spacing-small);
+    border: 1px solid var(--neutral-color-light);
+    border-radius: var(--border-radius-medium);
+    font-size: var(--font-size-medium);
+    box-sizing: border-box; /* Important for width 100% */
+}
+
+.pm-form-group input:focus,
+.pm-form-group textarea:focus,
+.pm-form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.pm-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-medium);
+    margin-top: var(--spacing-large);
+}
+
+.pm-save-btn,
+.pm-cancel-btn {
+    padding: var(--spacing-small) var(--spacing-large);
+    border-radius: var(--border-radius-medium);
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+    border: none;
+    font-weight: var(--font-weight-medium);
+}
+
+.pm-save-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.pm-save-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.pm-cancel-btn {
+    background-color: var(--neutral-color-light);
+    color: var(--text-color-dark);
+}
+
+.pm-cancel-btn:hover {
+    background-color: var(--neutral-color-medium);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pm-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pm-search-input {
+        width: 100%;
+        margin-bottom: var(--spacing-medium);
+    }
+
+    .pm-add-btn {
+        width: 100%;
+    }
+
+    .pm-table {
+        font-size: var(--font-size-xsmall);
+    }
+
+    .pm-table th,
+    .pm-table td {
+        padding: var(--spacing-small);
+    }
+
+    .pm-modal-content {
+        width: 95%;
+    }
+}

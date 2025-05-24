@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import '../styles/theme.css';
-import '../component/signup/signup.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../../styles/theme.css"; // Global theme
+import "./signup.css"; // Component-specific styles
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: 'cashier',
+    name: "",
+    email: "",
+    password: "",
+    role: "cashier",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,7 +21,7 @@ const SignupPage = () => {
     try {
       // Add signup logic here
     } catch (error) {
-      setError('Signup failed. Please try again.');
+      setError("Signup failed. Please try again.");
     }
   };
 
@@ -61,7 +62,7 @@ const SignupPage = () => {
             type="radio"
             name="role"
             value="admin"
-            checked={formData.role === 'admin'}
+            checked={formData.role === "admin"}
             onChange={handleChange}
           />
           Admin
@@ -71,7 +72,7 @@ const SignupPage = () => {
             type="radio"
             name="role"
             value="cashier"
-            checked={formData.role === 'cashier'}
+            checked={formData.role === "cashier"}
             onChange={handleChange}
           />
           Cashier
@@ -81,9 +82,14 @@ const SignupPage = () => {
         Sign Up
       </button>
       <p className="form-footer">
-        I'm already a member. <a href="/Login" className="link"><b>Login</b></a>
-        <span style={{ margin: '0 8px' }}>|</span>
-        <a href="/" className="link"><b>Home</b></a>
+        I'm already a member.{" "}
+        <Link to="/Login" className="link">
+          <b>Login</b>
+        </Link>
+        <span style={{ margin: "0 8px" }}>|</span>
+        <Link to="/" className="link">
+          <b>Home</b>
+        </Link>
       </p>
     </form>
   );

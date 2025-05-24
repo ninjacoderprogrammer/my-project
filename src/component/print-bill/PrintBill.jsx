@@ -1,10 +1,11 @@
-// filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\routes\print-bill.jsx
+// filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\component\print-bill\PrintBill.jsx
 import React, { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import '../styles/theme.css'; // Assuming you have a theme file
-import '../component/print-bill/print-bill.css'; // We'll create this for bill-specific styles
+import '../../styles/variables.css'; // Corrected path
+import '../../styles/theme.css'; 
+import './print-bill.css'; // We'll create this for bill-specific styles
 
 const PrintBill = () => {
   const location = useLocation();

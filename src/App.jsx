@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import React, { useState } from "react";
 import './styles/theme.css';
 // import NavBar from "./component/navbar/NavBar";
@@ -15,7 +15,9 @@ export default function App() {
     <>
       {/* {!hideNavBar && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} */}
       {/* Every child route will render here and has access to [isLoggedIn, setIsLoggedIn] */}
-      <Outlet context={[isLoggedIn, setIsLoggedIn]} />
+      <div className="main-content-area">
+        <Outlet context={[isLoggedIn, setIsLoggedIn]} />
+      </div>
       <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     </>
   );

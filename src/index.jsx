@@ -4,18 +4,18 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './index.css';
 
 import App from "./App";
-import Home from "./routes/Home";
-import Contact from "./routes/Contact";
-import Login from "./routes/Login";
-import SignUp from "./routes/SignUp";
-import Dashboard from "./routes/Dashboard"; // Admin Dashboard
-import CashierDashboard from "./routes/CashierDashboard"; // Cashier Dashboard
-import CashierManagement from "./routes/CashierManagement";
-import ProductManagement from "./routes/ProductManagement";
-import SalesInsights from "./routes/SalesInsight";
-import ViewStock from "./routes/ViewStock";
-import PerformPurchase from "./routes/PerformPurchase";
-import PrintBill from "./routes/print-bill"; // Import the new PrintBill component
+import Home from "./component/Home/Home";
+import Contact from "./component/Contact/Contact";
+import Login from "./component/Login/Login";
+import SignUp from "./component/signup/SignUp";
+import Dashboard from "./component/adminDashboard/Dashboard"; // Admin Dashboard
+import CashierDashboard from "./component/cashierDashboard/CashierDashboard.jsx";
+import CashierManagement from "./component/cashierManagement/CashierManagement";
+import ProductManagement from "./component/productManagement/ProductManagement.jsx";
+import SalesInsight from "./component/salesInsight/SalesInsight.jsx";
+import ViewStock from "./component/viewStock/ViewStock.jsx";
+import PerformPurchase from "./component/performPurchase/PerformPurchase.jsx";
+import PrintBill from "./component/print-bill/PrintBill.jsx";
 import RequireAuth from "./hoc/RequireAuth";
 import RequireRole from "./hoc/RequireRole";
 
@@ -57,7 +57,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           />
           <Route
             path="sales-insight"
-            element={<SalesInsights />}
+            element={<SalesInsight />}
           />
         </Route>
 

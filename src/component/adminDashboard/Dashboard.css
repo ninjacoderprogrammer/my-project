@@ -1,138 +1,86 @@
-/* General Reset */
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #FFFDFA, #F9F5EA);
-  color: #2A2A2A;
-  line-height: 1.6;
-}
+/* General Reset - Body styles are largely covered by theme.css, but we can override specifics if needed */
+/* body {} */ /* Removed empty ruleset */
 
 a {
-  text-decoration: none;
-  color: #2A2A2A;
+  /* text-decoration: none; */ /* Covered by theme.css */
+  color: var(--text-link);
   transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 a:hover {
-  color: #A0C774;
-  text-decoration: underline;
+  color: var(--text-link-hover);
+  /* text-decoration: underline; */ /* Covered by theme.css */
 }
 
 /* Containers */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
-}
+/* .container is defined in theme.css, specific overrides can go here if necessary */
+/* For example, if Dashboard needs a different max-width or padding */
 
-.card {
-  background-color: #FFFDFA;
-  border: 1px solid #A0C774;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 16px;
+/* .card is defined in theme.css. We can add specific styles for cards within the dashboard if needed,
+   or ensure these styles are general enough to be part of the main theme.css card style. */
+.card { /* Assuming this is a local override or specific type of card for the dashboard */
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg); /* Larger radius for a more modern feel */
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--box-shadow-lg);
 }
 
 /* Buttons */
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-}
-
-.btn-primary {
-  background-color: #A0C774;
-  color: #FFFDFA;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #DEEA9D;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #A0C774;
-  border: 2px solid #A0C774;
-}
-
-.btn-secondary:hover {
-  background-color: #A0C774;
-  color: #FFFDFA;
-}
+/* .btn, .btn-primary, .btn-secondary are defined in theme.css.
+   If these are meant to be different, they should have more specific class names
+   e.g., .btn-dashboard-action */
 
 /* Inputs */
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #A0C774;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-  border-color: #DEEA9D;
-  outline: none;
-}
+/* .input-field is defined in theme.css. */
 
 /* Forms */
 .form-label {
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
   display: block;
+  color: var(--text-primary);
 }
 
-.form-message {
-  color: #A0C774;
-  font-size: 14px;
-  margin-top: 8px;
+.form-message { /* This could be for success/error messages, consider more specific classes */
+  color: var(--primary-color); /* Or --success-color, --danger-color based on context */
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-sm);
 }
 
 /* Headers */
-h1, h2, h3 {
-  color: #2A2A2A;
-  margin-bottom: 16px;
+h1, h2, h3 { /* General header styling is in theme.css */
+  color: var(--text-primary); /* Ensure consistency */
+  margin-bottom: var(--spacing-md); /* Consistent spacing */
 }
 
-h1 {
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 20px;
-}
+/* h1, h2, h3 font sizes are set in theme.css */
 
 /* Sidebar */
 .sidebar {
-  background-color: #A0C774;
-  color: #FFFDFA;
-  padding: 16px;
-  border-radius: 12px;
-  width: 250px;
-  min-height: 100vh;
-  position: fixed;
+  background-color: var(--dark-color); /* Using a darker sidebar for contrast */
+  color: var(--text-on-dark);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  width: var(--sidebar-width);
+  min-height: 100vh; /* Consider if this should be full height or adapt */
+  position: fixed; /* Or sticky, depending on layout */
+  box-shadow: var(--box-shadow-lg);
 }
 
 .sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-on-dark);
+  border-bottom: 1px solid var(--secondary-color); /* Subtle separator */
+  padding-bottom: var(--spacing-md);
 }
 
 .sidebar ul {
@@ -141,98 +89,139 @@ h3 {
 }
 
 .sidebar ul li {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .sidebar ul li a {
-  color: #FFFDFA;
-  font-weight: bold;
-  transition: color 0.3s ease;
+  color: var(--text-on-dark); /* Lighter text for dark background */
+  font-weight: var(--font-weight-normal);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
 }
 
-.sidebar ul li a:hover {
-  color: #DEEA9D;
+.sidebar ul li a:hover,
+.sidebar ul li a.active { /* Style for active link */
+  color: var(--primary-color); /* Accent color on hover/active */
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+  padding-left: calc(var(--spacing-md) + var(--spacing-xs)); /* Indent on hover */
+  text-decoration: none;
 }
 
 /* Logout Button */
 .logout-button {
-  background-color: #FFFDFA;
-  color: #A0C774;
+  background-color: var(--danger-color); /* Using danger color for logout */
+  color: var(--text-on-primary); /* White text on colored button */
   border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 16px;
+  margin-top: var(--spacing-lg);
+  width: 100%; /* Make logout button full width of sidebar */
+  text-align: center;
+  font-weight: var(--font-weight-bold);
 }
 
 .logout-button:hover {
-  background-color: #DEEA9D;
-  color: #FFFDFA;
+  background-color: #c82333; /* Darker red on hover */
+  color: var(--text-on-primary);
 }
 
 /* Main Content */
 .main-content {
-  margin-left: 270px;
-  padding: 24px;
-  background-color: #FFFDFA;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: calc(var(--sidebar-width) + var(--spacing-lg)); /* Account for sidebar width and some gap */
+  padding: var(--spacing-lg);
+  background-color: var(--background-primary); /* Main background for content area */
+  border-radius: var(--border-radius-lg);
+  /* box-shadow: var(--box-shadow); */ /* Optional: shadow for the main content area */
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height) - (2 * var(--spacing-lg))); /* Adjust based on actual layout */
 }
 
-/* Hero Section */
+/* Hero Section - If this is specific to a dashboard page, keep it. Otherwise, generalize or remove. */
 .hero-section {
   text-align: center;
-  padding: 50px 20px;
-  background: linear-gradient(to bottom, #FFFDFA, #F9F5EA);
-  border-radius: 12px;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--background-secondary); /* Use a card-like background */
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--box-shadow);
 }
 
 .hero-section h1 {
-  font-size: 48px;
-  color: #2A2A2A;
+  font-size: calc(var(--font-size-base) * 2.5); /* Larger hero title */
+  color: var(--text-primary);
 }
 
 .hero-section p {
-  font-size: 18px;
-  color: #2A2A2A;
-  margin-bottom: 24px;
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
 }
 
-.cta-buttons .btn {
-  margin: 0 8px;
+.cta-buttons .btn { /* Assuming .btn is styled globally */
+  margin: 0 var(--spacing-sm);
 }
 
-/* Feature Cards */
+/* Feature Cards - Specific to dashboard, or a general pattern? */
 .features-section {
   display: flex;
-  justify-content: space-around;
-  margin-top: 40px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: var(--spacing-lg); /* Use gap for spacing between cards */
+  justify-content: space-around; /* Or space-between, center */
+  margin-top: var(--spacing-lg);
 }
 
 .feature-card {
-  background-color: #FFFDFA;
-  border: 1px solid #A0C774;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 30%;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-sm);
+  padding: var(--spacing-lg);
+  /* width: 30%; */ /* Consider flex-basis for responsiveness */
+  flex: 1 1 calc(33.333% - var(--spacing-lg)); /* Adjust for 3 cards per row, considering gap */
+  min-width: 280px; /* Minimum width before wrapping */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow);
 }
 
 .feature-card h3 {
-  font-size: 20px;
-  color: #2A2A2A;
-  margin-bottom: 12px;
+  font-size: var(--font-size-lg);
+  color: var(--primary-color); /* Use accent for feature titles */
+  margin-bottom: var(--spacing-md);
 }
 
 .feature-card p {
-  font-size: 16px;
-  color: #2A2A2A;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-base);
 }
+
+/* Ensure that global styles from theme.css for .container, .card, .btn, .input-field are sufficient.
+   If Dashboard.css needs to override or extend them, the selectors here should be more specific
+   or the general theme.css should be adjusted. */
+
+/* Example: If dashboard cards need unique styling */
+/*
+.dashboard-card {
+  background-color: var(--info-color);
+  color: var(--text-on-primary);
+}
+*/
+
+/* Example: If dashboard buttons need unique styling */
+/*
+.btn-dashboard-action {
+  background-color: var(--accent-color);
+  color: var(--text-on-primary);
+}
+.btn-dashboard-action:hover {
+  background-color: #138496; // Darker accent
+}
+*/

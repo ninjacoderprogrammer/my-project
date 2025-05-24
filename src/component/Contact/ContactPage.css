@@ -1,79 +1,61 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
-}
+/* Body styles are handled by theme.css */
 
 .contact-container {
   text-align: center;
-  padding: 50px 20px;
+  padding: var(--spacing-xl) var(--spacing-md); /* Use theme spacing */
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height) - (2 * var(--spacing-xl))); /* Adjust based on layout */
+  background-color: var(--background-primary);
 }
 
-.title {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: light-dark(#ffffff, #000000);
-}
+/* .form-title is globally styled in theme.css */
 
+/* .card is globally styled in theme.css, contact-wrapper can be a modifier or use global card styles */
 .contact-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
+  /* display: flex; */ /* This is already on .card in theme.css if it's a flex container */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  /* gap: 40px; */ /* Use theme spacing if needed, e.g., var(--spacing-lg) */
+  max-width: 500px; /* Or another appropriate max-width */
+  margin: 0 auto; /* Center the card */
+  /* background: var(--background-secondary); */ /* Handled by .card global style */
+  /* padding: var(--spacing-lg); */ /* Handled by .card global style */
+  /* border-radius: var(--border-radius-lg); */ /* Handled by .card global style */
+  /* box-shadow: var(--box-shadow-lg); */ /* Handled by .card global style */
 }
 
-.contact-form, .contact-info {
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 350px;
+.contact-form {
+  /* background: white; */ /* Redundant if inside a .card with background-secondary */
+  /* padding: 30px; */ /* Padding can be on .contact-wrapper or .card */
+  /* border-radius: 8px; */ /* Redundant if inside a .card */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */ /* Redundant if inside a .card */
+  width: 100%; /* Ensure form takes full width of its container (.contact-wrapper) */
 }
 
-.contact-form h2, .contact-info h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.contact-form h2, .contact-info h2 { /* Assuming .contact_info might be added later */
+  /* font-size: 24px; */ /* Use theme.css h2 styles */
+  /* margin-bottom: 20px; */ /* Use theme.css h2 styles or var(--spacing-md) */
+  color: var(--text-primary);
 }
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  background: #007BFF;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-}
-
-button:hover {
-  background: #0056b3;
-}
+/* input, textarea are globally styled as .input-field in theme.css */
+/* button is globally styled as .btn and .btn-primary in theme.css */
 
 .contact-info p {
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: var(--font-size-base);
+  margin: var(--spacing-sm) 0;
+  color: var(--text-secondary);
 }
 
 .contact-info i {
-  margin-right: 10px;
-  color: #007BFF;
+  margin-right: var(--spacing-sm);
+  color: var(--primary-color);
 }
 
 .map-container iframe {
   width: 100%;
   height: 250px;
   border: none;
-  margin-top: 20px;
-  border-radius: 5px;
+  margin-top: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-sm);
 }

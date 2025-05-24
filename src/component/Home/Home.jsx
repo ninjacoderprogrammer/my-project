@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/theme.css";
-import '../component/Home/Home.css';
+import "../../styles/theme.css"; // Global theme for consistent styling
+import "./Home.css"; // Specific styles for Home component
 
 const Home = () => {
   return (

@@ -1,136 +1,129 @@
-/* Overall container */
+/* Overall container - .login-container might be a better name if it's the page container */
+.login-container { /* Assuming this is the main container for the login page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); /* Adjust if navbar/footer are present */
+    padding: var(--spacing-md);
+    background-color: var(--background-secondary); /* Changed: Page now uses card's original background */
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* .login-form is styled as a card */
 .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 40px 30px;
-    background: var(--color-bg-light, #FFFDFA);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(160, 199, 116, 0.15);
-    color: var(--color-text-dark, #2A2A2A);
-    transition: transform 0.3s ease;
-    animation: fadeIn 0.8s ease forwards;
+    max-width: 450px; /* Consistent with ForgotPassword */
+    width: 100%;
+    margin: 0 auto; /* Centered if not using flex on parent */
+    padding: var(--spacing-lg);
+    background: var(--background-primary); /* Changed: Card now uses page's original background */
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow); /* UPDATED from --box-shadow-lg to --box-shadow */
+    color: var(--text-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* animation: fadeIn 0.8s ease forwards; Applied to login-container now */
 }
 
 .login-form:hover {
     transform: translateY(-5px);
+    box-shadow: var(--box-shadow-lg); /* Keep a slightly more pronounced shadow on hover, or change to a new var if --box-shadow-lg is too much */
 }
 
-.form-title {
-    font-size: 28px;
-    margin-bottom: 30px;
-    font-weight: 600;
-    color: var(--color-accent, #A0C774);
+/* .form-title is globally styled in theme.css */
+/* If specific overrides for login form title: */
+.login-form .form-title {
+    font-size: var(--font-size-xl); /* Or specific size */
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-bold); /* theme.css might already cover this */
+    color: var(--primary-color); /* Or var(--text-primary) */
 }
 
-/* Input fields */
-.input-field {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid var(--color-accent, #A0C774);
-    background-color: var(--color-bg-cream, #F9F5EA);
-    border-radius: 8px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    color: var(--color-text-dark, #2A2A2A);
-    box-sizing: border-box;
+/* .input-field is globally styled in theme.css */
+/* Overrides for login input fields if necessary: */
+/*
+.login-form .input-field {
+    background-color: var(--background-primary); // Slightly different background for inputs if desired
 }
+*/
 
-.input-field:focus {
-    outline: none;
-    border-color: var(--color-accent-light, #DEEA9D);
-    box-shadow: 0 0 0 2px rgba(160, 199, 116, 0.1);
+/* .btn-primary is globally styled in theme.css */
+/* Overrides for login primary button if necessary: */
+/*
+.login-form .btn-primary {
+    margin-bottom: var(--spacing-md);
 }
+*/
 
-/* Primary button */
-.btn-primary {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--color-accent, #A0C774);
-    color: var(--color-bg-light, #FFFDFA);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-bottom: 15px;
+/* .btn-secondary is globally styled in theme.css */
+/* Overrides for login secondary button if necessary: */
+/*
+.login-form .btn-secondary {
+    margin-bottom: var(--spacing-sm);
 }
-
-.btn-primary:hover {
-    background-color: var(--color-accent-light, #DEEA9D);
-    color: var(--color-text-dark, #2A2A2A);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(160, 199, 116, 0.15);
-}
-
-/* Secondary button */
-.btn-secondary {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    border: 2px solid var(--color-accent, #A0C774);
-    color: var(--color-accent, #A0C774);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background-color: var(--color-accent, #A0C774);
-    color: var(--color-bg-light, #FFFDFA);
-}
+*/
 
 /* Role selection */
 .role-selection {
-    margin: 10px 0 20px 0;
+    margin: var(--spacing-sm) 0 var(--spacing-md) 0;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
-    gap: 20px;
+    justify-content: flex-start; /* Or space-around if preferred */
+    gap: var(--spacing-lg);
+    align-items: center;
 }
 
 .role-selection label {
-    font-size: 15px;
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .role-selection input[type="radio"] {
-    margin-right: 5px;
+    margin-right: var(--spacing-xs);
+    accent-color: var(--primary-color); /* Modern way to style radio button color */
+    width: 1em;
+    height: 1em;
 }
 
-/* Form message */
-.form-message {
-    color: #d32f2f;
-    font-size: 14px;
-    margin-bottom: 10px;
+/* Form message for errors/success */
+/* theme.css might have .form-message.error, .form-message.success */
+.form-message { /* General styling, can be combined with .error or .success class */
+    color: var(--danger-color); /* Default to danger color */
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
     width: 100%;
-    text-align: left;
+    text-align: left; /* Or center if preferred */
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(var(--danger-rgb, 220, 53, 69), 0.1); /* Assuming --danger-rgb is defined for rgba */
 }
+
+.form-message.success {
+    color: var(--success-color);
+    background-color: rgba(var(--success-rgb, 40, 167, 69), 0.1); /* Assuming --success-rgb is defined */
+}
+
 
 /* Form footer */
 .form-footer {
-    margin-top: 10px;
-    font-size: 15px;
-    color: var(--color-text-dark, #2A2A2A);
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
 }
 
-/* Links */
-.link {
-    color: var(--color-accent, #A0C774);
-    text-decoration: underline;
-    transition: color 0.3s;
+/* .link is globally styled in theme.css */
+/*
+.login-form .link {
+    color: var(--primary-color);
 }
-
-.link:hover {
-    color: var(--color-accent-light, #DEEA9D);
+.login-form .link:hover {
+    color: var(--text-link-hover);
 }
+*/
 
 /* Animation */
 @keyframes fadeIn {
@@ -141,7 +134,17 @@
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .login-form {
-        width: 95%;
-        padding: 20px 10px;
+        /* width: 95%; */ /* Already 100% of its max-width container */
+        padding: var(--spacing-md); /* Adjust padding for smaller screens */
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+    .login-form .form-title {
+        font-size: calc(var(--font-size-xl) * 0.9);
+    }
+    .role-selection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
     }
 }

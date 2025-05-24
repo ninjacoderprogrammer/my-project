@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/theme.css"; // Global theme
+import "../../styles/theme.css"; // Global theme
+import "./ForgotPassword.css"; // Component-specific styles
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {

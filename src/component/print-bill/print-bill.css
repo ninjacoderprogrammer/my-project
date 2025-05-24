@@ -1,145 +1,213 @@
+/* filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\routes\print-bill.css */
 .print-bill-container {
     max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-lg);
 }
 
 .bill-actions {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #eee;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px dashed var(--border-color);
     text-align: center; /* Center buttons */
 }
 
 .bill-actions button {
-    margin-right: 10px;
-    padding: 10px 15px;
-    font-size: 1rem;
+    margin-right: var(--spacing-sm);
+    /* Utilize .btn classes from theme.css for styling */
 }
 
 .bill-content {
-    padding: 20px;
-    border: 1px solid #eee;
+    padding: var(--spacing-lg);
+    /* border: 1px solid var(--border-color); */ /* Optional: content might not need another border if container has one */
 }
 
 .bill-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: var(--spacing-xl);
 }
 
 .bill-header h1 {
-    font-size: 2.5rem;
-    color: var(--primary-color, #333);
-    margin-bottom: 10px;
+    font-size: calc(var(--font-size-base) * 2.8); /* Slightly larger for bill heading */
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
 }
 
 .store-details p {
-    margin: 2px 0;
-    font-size: 0.9rem;
-    color: #555;
+    margin: var(--spacing-xs) 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
 }
 
+.customer-details {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.customer-details p {
+    margin: var(--spacing-xs) 0;
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+}
+.customer-details p strong {
+    font-weight: var(--font-weight-bold);
+    margin-right: var(--spacing-sm);
+}
+
+
 .bill-info {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .bill-info p {
-    margin: 5px 0;
-    font-size: 1rem;
+    margin: var(--spacing-xs) 0;
+    font-size: var(--font-size-base);
 }
 
 .bill-items h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: var(--secondary-color, #555);
+    font-size: calc(var(--font-size-base) * 1.75);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
 }
 
 .bill-items table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .bill-items th,
 .bill-items td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm) var(--spacing-md);
     text-align: left;
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
 }
 
 .bill-items th {
-    background-color: #f9f9f9;
-    font-weight: bold;
+    background-color: var(--light-color);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
 }
 
-.bill-items td:nth-child(3), /* Quantity */
-.bill-items td:nth-child(4), /* Price per Unit */
-.bill-items td:nth-child(5) { /* Total Price */
+.bill-items td.item-quantity,
+.bill-items td.item-price,
+.bill-items td.item-total {
     text-align: right;
 }
 
 .bill-summary {
     text-align: right;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--dark-color); /* More prominent top border */
 }
 
 .bill-summary p {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--primary-color, #333);
+    font-size: calc(var(--font-size-base) * 1.25);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: var(--spacing-sm) 0;
 }
 
 .bill-footer {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px dashed #ccc;
-    font-size: 0.9rem;
-    color: #777;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px dashed var(--border-color);
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
 }
 
 /* Print-specific styles */
 @media print {
-    body * {
-        visibility: hidden; /* Hide everything */
-    }
-
-    .print-bill-container,
-    .print-bill-container * {
-        visibility: visible; /* Only show the bill container and its children */
+    body {
+        background-color: #fff !important; /* Ensure background is white for printing */
+        font-size: 10pt !important; /* Adjust base font size for print */
+        color: #000 !important;
     }
 
     .print-bill-container {
-        position: absolute;
-        left: 0;
-        top: 0;
         width: 100%;
+        max-width: 100%;
         margin: 0;
         padding: 0;
-        border: none;
-        box-shadow: none;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
     }
 
     .bill-actions {
-        display: none; /* Hide action buttons when printing */
+        display: none !important; /* Hide action buttons when printing */
     }
 
     .bill-content {
-        border: none;
-        padding: 10mm; /* Add some padding for printing */
+        border: none !important;
+        padding: 0 !important; /* Adjust padding for print if needed */
+    }
+    
+    .bill-header h1 {
+        font-size: 20pt !important; /* Adjust heading size for print */
+        color: #000 !important;
     }
 
-    /* Ensure table borders are visible in print */
-    .bill-items th,
-    .bill-items td {
-        border: 1px solid #000 !important; /* Use !important to override other styles if needed */
+    .store-details p, .bill-info p, .bill-items th, .bill-items td, .customer-details p {
+        font-size: 9pt !important;
+        color: #000 !important;
+    }
+    
+    .bill-items table {
+        page-break-inside: auto; /* Allow table to break across pages if necessary */
+        width: 100% !important;
+    }
+    .bill-items tr {
+        page-break-inside: avoid !important; /* Try to keep rows on the same page */
+        page-break-after: auto;
+    }
+    .bill-items thead {
+        display: table-header-group !important; /* Repeat table header on each page */
+    }
+    .bill-items th, .bill-items td {
+        border: 1px solid #ccc !important; /* Lighter border for print */
+    }
+    .bill-items th {
+        background-color: #eee !important;
+    }
+
+    .bill-summary p {
+        font-size: 12pt !important;
+        color: #000 !important;
+    }
+
+    .bill-footer {
+        font-size: 8pt !important;
+        color: #333 !important;
+        /* position: fixed; 
+        bottom: 15mm; 
+        width: calc(100% - 20mm); 
+        left: 10mm; 
+        right: 10mm; */
+        /* Fixed positioning for footers in print can be tricky and browser-dependent.
+           Often better to let it flow or use @page margin boxes if full control is needed (more advanced CSS). */
+    }
+
+    /* Ensure links are not colored or underlined in print unless desired */
+    a, a:visited {
+        color: #000 !important; /* Black text for links */
+        text-decoration: none !important;
+    }
+
+    /* Hide elements not meant for print if they have a specific class */
+    .no-print {
+        display: none !important;
     }
 }

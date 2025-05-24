@@ -1,23 +1,29 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import "../styles/theme.css"; // Use global theme
+import { Link, Outlet } from "react-router-dom"; // Added Outlet
+import "../../styles/theme.css"; // Global theme
+import "./Dashboard.css"; // Component-specific styles
 
-export default function CashierDashboard() {
+const AdminDashboard = () => {
   return (
     <div className="dashboard-container">
       {/* Sidebar Navigation */}
       <div className="sidebar">
-        <h2 className="sidebar-title">Cashier Dashboard</h2>
+        <h2 className="sidebar-title">Dashboard Menu</h2>
         <nav>
           <ul className="sidebar-list">
             <li>
-              <Link to="/cashier-dashboard/view-stock" className="sidebar-link">
-                View Stock
+              <Link to="/dashboard/cashier-management" className="sidebar-link">
+                Cashier Management
               </Link>
             </li>
             <li>
-              <Link to="/cashier-dashboard/perform-purchase" className="sidebar-link">
-                Perform Purchase
+              <Link to="/dashboard/product-management" className="sidebar-link">
+                Product Management
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/sales-insight" className="sidebar-link">
+                Sales Insight
               </Link>
             </li>
           </ul>
@@ -39,4 +45,6 @@ export default function CashierDashboard() {
       </main>
     </div>
   );
-}
+};
+
+export default AdminDashboard;

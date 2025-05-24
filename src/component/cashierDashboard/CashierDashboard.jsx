@@ -1,28 +1,24 @@
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import "../styles/theme.css"; // Global theme
-import '../component/Home/Home.css';
+import "../../styles/theme.css"; // Use global theme
+import "./cashierDashboard.css"; // Specific styles for this component
 
-export default function Dashboard() {
+export default function CashierDashboard() {
   return (
     <div className="dashboard-container">
       {/* Sidebar Navigation */}
       <div className="sidebar">
-        <h2 className="sidebar-title">Dashboard Menu</h2>
+        <h2 className="sidebar-title">Cashier Dashboard</h2>
         <nav>
           <ul className="sidebar-list">
             <li>
-              <Link to="/dashboard/cashier-management" className="sidebar-link">
-                Cashier Management
+              <Link to="/cashier-dashboard/view-stock" className="sidebar-link">
+                View Stock
               </Link>
             </li>
             <li>
-              <Link to="/dashboard/product-management" className="sidebar-link">
-                Product Management
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard/sales-insight" className="sidebar-link">
-                Sales Insight
+              <Link to="/cashier-dashboard/perform-purchase" className="sidebar-link">
+                Perform Purchase
               </Link>
             </li>
           </ul>
