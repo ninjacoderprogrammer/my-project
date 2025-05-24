@@ -1,150 +1,282 @@
-/* Overall container - .login-container might be a better name if it's the page container */
-.login-container { /* Assuming this is the main container for the login page */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); /* Adjust if navbar/footer are present */
-    padding: var(--spacing-md);
-    background-color: var(--background-secondary); /* Changed: Page now uses card's original background */
-    animation: fadeIn 0.8s ease forwards;
+/* filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\component\Login\Login.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --login-primary-color: #1a73e8; /* Blue */
+  --login-accent-color: #e8f0fe; /* Light blue background */
+  --login-font-color: #202124; /* Dark gray/black */
+  --login-border-color: #dadce0; /* Light gray */
+  --login-input-bg: #fff;
+  --login-card-bg: #ffffff; /* White or #f9f9f9 */
+  --login-body-bg: #f4f7f6; /* Subtle gradient or light gray/white tone */
 }
 
-/* .login-form is styled as a card */
-.login-form {
-    display: flex;
+/* Overall page container */
+.login-page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--login-body-bg);
+  animation: fadeInPage 0.5s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Left Branding Section */
+.login-branding-section {
+  flex-basis: 50%;
+  background: linear-gradient(135deg, var(--login-primary-color) 0%, #5a9bf0 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.login-branding-section .logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.login-branding-section .welcome-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* Right Form Section */
+.login-form-section {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--login-body-bg); /* Or a slightly different shade */
+}
+
+/* Login Card */
+.login-card-container { /* Renamed from login-card to avoid conflict if old styles linger */
+  background: var(--login-card-bg);
+  padding: 3rem; /* Clean padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Elevation */
+  width: 100%;
+  max-width: 400px; /* Concise form */
+  animation: fadeInForm 0.7s ease-out 0.3s forwards; /* Soft fade-in for form */
+  opacity: 0; /* Start hidden for animation */
+  color: var(--login-font-color);
+}
+
+@keyframes fadeInForm {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card-container .form-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--login-font-color);
+}
+
+.input-group {
+  margin-bottom: 1.25rem;
+}
+
+.login-card-container .input-field {
+  width: 100%;
+  padding: 0.875rem 1rem; /* Uniform height and padding */
+  border: 1px solid var(--login-border-color); /* Custom border */
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--login-font-color);
+  background-color: var(--login-input-bg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card-container .input-field::placeholder {
+  color: #868e96;
+}
+
+.login-card-container .input-field:focus {
+  outline: none;
+  border-color: var(--login-primary-color); /* Smooth :focus border glow */
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.remember-me-checkbox {
+  display: flex;
+  align-items: center;
+  color: var(--login-font-color);
+}
+
+.remember-me-checkbox input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--login-primary-color); /* Styled professionally */
+}
+
+.forgot-password-link {
+  color: var(--login-primary-color);
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+.login-card-container .btn-primary {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: var(--login-primary-color); /* Solid fill */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 1.5rem; /* Space before footer */
+}
+
+.login-card-container .btn-primary:hover {
+  background-color: #1368d6; /* Darkens slightly */
+}
+
+.login-card-container .btn-primary:disabled {
+  background-color: #a0c3f0;
+  cursor: not-allowed;
+}
+
+.form-footer-message {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--login-font-color);
+}
+
+.form-footer-message .signup-link {
+  color: var(--login-primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.form-footer-message .signup-link:hover {
+  text-decoration: underline;
+}
+
+.form-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) { /* Tablet and smaller */
+  .login-branding-section {
+    flex-basis: 40%;
+  }
+  .login-form-section {
+    flex-basis: 60%;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .login-page-wrapper {
     flex-direction: column;
-    align-items: center;
-    max-width: 450px; /* Consistent with ForgotPassword */
-    width: 100%;
-    margin: 0 auto; /* Centered if not using flex on parent */
-    padding: var(--spacing-lg);
-    background: var(--background-primary); /* Changed: Card now uses page's original background */
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--box-shadow); /* UPDATED from --box-shadow-lg to --box-shadow */
-    color: var(--text-primary);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* animation: fadeIn 0.8s ease forwards; Applied to login-container now */
+  }
+
+  .login-branding-section {
+    flex-basis: auto; /* Reset basis */
+    min-height: 250px; /* Give some height */
+    padding: 2rem;
+    order: 1; /* Show branding first if desired, or remove to show form first */
+  }
+  
+  .login-branding-section .logo {
+    font-size: 2rem;
+  }
+  .login-branding-section .welcome-text {
+    font-size: 1rem;
+  }
+
+  .login-form-section {
+    flex-basis: auto; /* Reset basis */
+    padding: 1.5rem; /* Reduce padding on mobile */
+    order: 2;
+  }
+
+  .login-card-container {
+    padding: 2rem; /* Reduce card padding on mobile */
+    margin-top: 0; /* Remove any top margin if branding is above */
+    box-shadow: none; /* Optional: remove shadow on mobile for flatter design */
+  }
+
+  .login-card-container .form-title {
+    font-size: 1.6rem;
+  }
 }
 
-.login-form:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow-lg); /* Keep a slightly more pronounced shadow on hover, or change to a new var if --box-shadow-lg is too much */
-}
-
-/* .form-title is globally styled in theme.css */
-/* If specific overrides for login form title: */
-.login-form .form-title {
-    font-size: var(--font-size-xl); /* Or specific size */
-    margin-bottom: var(--spacing-lg);
-    font-weight: var(--font-weight-bold); /* theme.css might already cover this */
-    color: var(--primary-color); /* Or var(--text-primary) */
-}
-
-/* .input-field is globally styled in theme.css */
-/* Overrides for login input fields if necessary: */
-/*
-.login-form .input-field {
-    background-color: var(--background-primary); // Slightly different background for inputs if desired
-}
-*/
-
-/* .btn-primary is globally styled in theme.css */
-/* Overrides for login primary button if necessary: */
-/*
-.login-form .btn-primary {
-    margin-bottom: var(--spacing-md);
-}
-*/
-
-/* .btn-secondary is globally styled in theme.css */
-/* Overrides for login secondary button if necessary: */
-/*
-.login-form .btn-secondary {
-    margin-bottom: var(--spacing-sm);
-}
-*/
-
-/* Role selection */
-.role-selection {
-    margin: var(--spacing-sm) 0 var(--spacing-md) 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start; /* Or space-around if preferred */
-    gap: var(--spacing-lg);
-    align-items: center;
-}
-
-.role-selection label {
-    font-size: var(--font-size-base);
-    color: var(--text-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.role-selection input[type="radio"] {
-    margin-right: var(--spacing-xs);
-    accent-color: var(--primary-color); /* Modern way to style radio button color */
-    width: 1em;
-    height: 1em;
-}
-
-/* Form message for errors/success */
-/* theme.css might have .form-message.error, .form-message.success */
-.form-message { /* General styling, can be combined with .error or .success class */
-    color: var(--danger-color); /* Default to danger color */
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--spacing-md);
-    width: 100%;
-    text-align: left; /* Or center if preferred */
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    background-color: rgba(var(--danger-rgb, 220, 53, 69), 0.1); /* Assuming --danger-rgb is defined for rgba */
-}
-
-.form-message.success {
-    color: var(--success-color);
-    background-color: rgba(var(--success-rgb, 40, 167, 69), 0.1); /* Assuming --success-rgb is defined */
-}
-
-
-/* Form footer */
-.form-footer {
-    margin-top: var(--spacing-md);
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-}
-
-/* .link is globally styled in theme.css */
-/*
-.login-form .link {
-    color: var(--primary-color);
-}
-.login-form .link:hover {
-    color: var(--text-link-hover);
-}
-*/
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive adjustments */
 @media (max-width: 480px) {
-    .login-form {
-        /* width: 95%; */ /* Already 100% of its max-width container */
-        padding: var(--spacing-md); /* Adjust padding for smaller screens */
-        margin-top: var(--spacing-lg);
-        margin-bottom: var(--spacing-lg);
-    }
-    .login-form .form-title {
-        font-size: calc(var(--font-size-xl) * 0.9);
-    }
-    .role-selection {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
-    }
+  .login-branding-section {
+    min-height: 200px;
+  }
+   .login-card-container {
+    padding: 1.5rem;
+  }
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem; /* Add gap when stacked */
+  }
 }
+
+/* 
+  Reminder: Remove or ensure old styles targeting .login-page-container, .login-card etc. 
+  do not conflict. This new CSS uses .login-page-wrapper and .login-card-container.
+  The old glassmorphism styles for:
+  .login-page-container, 
+  .login-card,
+  .login-logo,
+  .input-field-container,
+  .login-links,
+  .login-card .form-footer .separator 
+  should be reviewed if they were not fully overwritten.
+*/
+
+/* Ensure global theme styles from theme.css or variables.css don't overly conflict.
+   The new :root variables are prefixed with --login- to avoid clashes.
+*/
