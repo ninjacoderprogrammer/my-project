@@ -221,7 +221,10 @@ The backend exposes RESTful APIs for various functionalities. All API routes are
 
 ## Screenshots
 
-![Login Page](path/to/your/screenshot/login.png)
+![Login Page](screenshots/login-page.png)
+![Admin Dashboard](screenshots/admin-dashboard.png)
+![Product Management](screenshots/product-management.png)
+![Sales Processing](screenshots/sales-processing.png)
 
 ## Contributing
 
