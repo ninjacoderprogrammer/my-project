@@ -1,61 +1,243 @@
-/* Body styles are handled by theme.css */
+/* filepath: c:\Users\bhard\Desktop\Retail-Automation-Platform\src\component\Contact\ContactPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-.contact-container {
-  text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md); /* Use theme spacing */
-  min-height: calc(100vh - var(--navbar-height) - var(--footer-height) - (2 * var(--spacing-xl))); /* Adjust based on layout */
-  background-color: var(--background-primary);
+:root {
+  /* Re-using login variables for thematic consistency, prefixing with --contact- if customization is needed later */
+  --contact-primary-color: #1a73e8; /* Blue */
+  --contact-accent-color: #e8f0fe; /* Light blue background */
+  --contact-font-color: #202124; /* Dark gray/black */
+  --contact-font-light-color: #5f6368; /* Lighter gray for secondary text */
+  --contact-border-color: #dadce0; /* Light gray */
+  --contact-input-bg: #fff;
+  --contact-card-bg: #ffffff;
+  --contact-body-bg: #f4f7f6; /* Subtle gradient or light gray/white tone */
+  --contact-hero-gradient-start: #1a73e8;
+  --contact-hero-gradient-end: #5a9bf0;
+  --contact-text-on-primary: #ffffff;
+
+  --contact-spacing-sm: 0.5rem;
+  --contact-spacing-md: 1rem;
+  --contact-spacing-lg: 1.5rem;
+  --contact-spacing-xl: 2rem;
+  --contact-spacing-xxl: 3rem;
+
+  --contact-border-radius: 8px;
+  --contact-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* .form-title is globally styled in theme.css */
-
-/* .card is globally styled in theme.css, contact-wrapper can be a modifier or use global card styles */
-.contact-wrapper {
-  /* display: flex; */ /* This is already on .card in theme.css if it's a flex container */
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
-  /* gap: 40px; */ /* Use theme spacing if needed, e.g., var(--spacing-lg) */
-  max-width: 500px; /* Or another appropriate max-width */
-  margin: 0 auto; /* Center the card */
-  /* background: var(--background-secondary); */ /* Handled by .card global style */
-  /* padding: var(--spacing-lg); */ /* Handled by .card global style */
-  /* border-radius: var(--border-radius-lg); */ /* Handled by .card global style */
-  /* box-shadow: var(--box-shadow-lg); */ /* Handled by .card global style */
-}
-
-.contact-form {
-  /* background: white; */ /* Redundant if inside a .card with background-secondary */
-  /* padding: 30px; */ /* Padding can be on .contact-wrapper or .card */
-  /* border-radius: 8px; */ /* Redundant if inside a .card */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */ /* Redundant if inside a .card */
-  width: 100%; /* Ensure form takes full width of its container (.contact-wrapper) */
-}
-
-.contact-form h2, .contact-info h2 { /* Assuming .contact_info might be added later */
-  /* font-size: 24px; */ /* Use theme.css h2 styles */
-  /* margin-bottom: 20px; */ /* Use theme.css h2 styles or var(--spacing-md) */
-  color: var(--text-primary);
-}
-
-/* input, textarea are globally styled as .input-field in theme.css */
-/* button is globally styled as .btn and .btn-primary in theme.css */
-
-.contact-info p {
-  font-size: var(--font-size-base);
-  margin: var(--spacing-sm) 0;
-  color: var(--text-secondary);
-}
-
-.contact-info i {
-  margin-right: var(--spacing-sm);
-  color: var(--primary-color);
-}
-
-.map-container iframe {
+/* Overall page container */
+.contact-page-wrapper {
+  display: flex;
+  min-height: 100vh;
   width: 100%;
-  height: 250px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--contact-body-bg);
+  animation: fadeInPage 0.5s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Left Branding Section */
+.contact-branding-section {
+  flex-basis: 45%; /* Adjust as needed */
+  background: linear-gradient(135deg, var(--contact-hero-gradient-start) 0%, var(--contact-hero-gradient-end) 100%);
+  color: var(--contact-text-on-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--contact-spacing-xxl);
+  text-align: center;
+}
+
+.contact-branding-section .logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: var(--contact-spacing-md);
+}
+
+.contact-branding-section .tagline {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  max-width: 400px;
+  opacity: 0.9;
+}
+
+/* Right Form Section */
+.contact-form-section {
+  flex-basis: 55%; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--contact-spacing-xl);
+  background-color: var(--contact-body-bg);
+}
+
+/* Contact Card */
+.contact-card-container {
+  background: var(--contact-card-bg);
+  padding: var(--contact-spacing-xl); /* Clean padding */
+  border-radius: var(--contact-border-radius);
+  box-shadow: var(--contact-box-shadow);
+  width: 100%;
+  max-width: 500px; /* Concise form */
+  animation: fadeInForm 0.7s ease-out 0.3s forwards; /* Soft fade-in for form */
+  opacity: 0; /* Start hidden for animation */
+  color: var(--contact-font-color);
+}
+
+@keyframes fadeInForm {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-card-container .form-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: var(--contact-spacing-lg);
+  text-align: center;
+  color: var(--contact-font-color);
+}
+
+.input-group {
+  margin-bottom: var(--contact-spacing-lg);
+}
+
+.contact-card-container .input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--contact-border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--contact-font-color);
+  background-color: var(--contact-input-bg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.contact-card-container .input-field::placeholder {
+  color: #868e96;
+}
+
+.contact-card-container .input-field:focus {
+  outline: none;
+  border-color: var(--contact-primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+}
+
+.contact-card-container textarea.input-field {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-card-container .btn-primary {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: var(--contact-primary-color);
+  color: white;
   border: none;
-  margin-top: var(--spacing-lg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-sm);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-card-container .btn-primary:hover {
+  background-color: #1368d6; /* Darkens slightly */
+}
+
+.contact-card-container .btn-primary:disabled {
+  background-color: #a0c3f0;
+  cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) { /* Tablet and smaller */
+  .contact-branding-section {
+    flex-basis: 40%;
+  }
+  .contact-form-section {
+    flex-basis: 60%;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .contact-page-wrapper {
+    flex-direction: column;
+  }
+
+  .contact-branding-section {
+    flex-basis: auto; /* Reset basis */
+    min-height: 250px; /* Give some height */
+    padding: var(--contact-spacing-xl);
+    order: 1; 
+  }
+  
+  .contact-branding-section .logo {
+    font-size: 2.2rem;
+  }
+  .contact-branding-section .tagline {
+    font-size: 1.1rem;
+  }
+
+  .contact-form-section {
+    flex-basis: auto; /* Reset basis */
+    padding: var(--contact-spacing-lg);
+    order: 2;
+  }
+
+  .contact-card-container { /* Ensure card is not overly wide on mobile */
+    max-width: 100%;
+    padding: var(--contact-spacing-lg);
+  }
+}
+
+/* Error message styling (if you add form validation) */
+.error-message {
+  color: #d93025; /* Google's error red */
+  font-size: 0.875rem;
+  margin-top: var(--contact-spacing-sm);
+}
+
+/* Success message styling */
+.success-message {
+  color: #1e8e3e; /* Google's success green */
+  font-size: 0.875rem;
+  margin-top: var(--contact-spacing-sm);
+  padding: var(--contact-spacing-md);
+  background-color: #e6f4ea;
+  border: 1px solid #1e8e3e;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Footer links styling (if any within the form section) */
+.contact-form-footer {
+  margin-top: var(--contact-spacing-lg);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.contact-form-footer a {
+  color: var(--contact-primary-color);
+  text-decoration: none;
+  margin: 0 var(--contact-spacing-sm);
+}
+
+.contact-form-footer a:hover {
+  text-decoration: underline;
 }

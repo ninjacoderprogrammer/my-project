@@ -1,332 +1,268 @@
-# Retail Automation Platform  
-**Final Semester Project Report**  
-**Submitted in partial fulfillment of the requirements for the degree of Master of Computer Applications (MCA)**  
-**Central University of Himachal Pradesh**  
-**January 2024 – June 2024**
+# Retail Automation Platform
 
----
-
-## Title Page
-
-**Project Title:**  
-**Retail Automation Platform**
-
-**Team Members:**  
-- Sawan Bhardwaj – Backend Engineer  
-- Rajesh Kumar – Frontend Engineer  
-
-**Institution:**  
-Central University of Himachal Pradesh
-
-**Course:**  
-Master of Computer Applications (MCA)
-
-**Supervisor:**  
-Dr. Pradeep Chouksey
-
-**Duration:**  
-January 2024 – June 2024
-
----
-
-## Declaration
-
-We hereby declare that the project report entitled **"Retail Automation Platform"** submitted to the Central University of Himachal Pradesh in partial fulfillment of the requirements for the award of the degree of Master of Computer Applications is a record of original work carried out by us under the supervision of Dr. Pradeep Chouksey. This project has not been submitted elsewhere for the award of any other degree or diploma.
-
-<br>
-**Sawan Bhardwaj**  
-**Rajesh Kumar**  
-Date: ___________
-
----
-
-## Acknowledgements
-
-We express our sincere gratitude to our supervisor, **Dr. Pradeep Chouksey**, for his invaluable guidance, encouragement, and support throughout the development of this project. We also thank the faculty and staff of the Department of Computer Science, Central University of Himachal Pradesh, for providing us with the necessary resources and a conducive environment for learning.
-
-We are grateful to our classmates for their constructive feedback and to our families for their constant encouragement.
-
----
-
-## Abstract
-
-This report presents the design and implementation of the **Retail Automation Platform**, a full-stack web application developed as a final semester project for the MCA program. The platform aims to automate and streamline retail operations for small shops, providing modules for product management, cashier management, inventory tracking, sales transactions, and analytics. The system supports both admin and cashier roles, each with tailored dashboards and functionalities. The project leverages modern web technologies, including React for the frontend and Node.js with Express and PostgreSQL for the backend, and is hosted on AWS infrastructure. The report details the system's architecture, design, implementation, testing, and future enhancement plans.
+A comprehensive web-based platform designed to streamline retail operations, manage sales, inventory, and user roles within a retail environment. This platform aims to provide an efficient and user-friendly solution for small to medium-sized retail businesses.
 
 ---
 
 ## Table of Contents
 
-1. [Introduction](#chapter-1-introduction)  
-2. [Literature Review](#chapter-2-literature-review)  
-3. [System Analysis](#chapter-3-system-analysis)  
-4. [System Design](#chapter-4-system-design)  
-5. [Implementation](#chapter-5-implementation)  
-6. [Testing](#chapter-6-testing)  
-7. [Results and Discussion](#chapter-7-results-and-discussion)  
-8. [Conclusion and Future Work](#chapter-8-conclusion-and-future-work)  
-9. [References](#references)  
+- [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [API Reference](#api-reference)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+- [License](#license)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
-## Chapter 1: Introduction
+## About
 
-### 1.1 Background
+The Retail Automation Platform is a full-stack web application built to modernize and simplify the day-to-day operations of a retail store. It offers distinct functionalities for different user roles (Administrators and Cashiers), covering aspects from inventory management to sales processing and user administration.
 
-Retail businesses, especially small shops, face challenges in managing inventory, tracking sales, and ensuring efficient cashier operations. Manual processes are error-prone and time-consuming, often leading to stock discrepancies and lost sales opportunities. The advent of digital solutions offers an opportunity to automate these processes, enhance accuracy, and provide actionable insights.
+- **What does it do?** It allows administrators to manage products, view stock, oversee sales transactions, and manage cashier accounts. Cashiers can process sales, generate bills, and view product information.
+- **Why did you build it?** To create an integrated system that enhances operational efficiency, improves inventory accuracy, provides insights into sales data, and offers a better user experience for retail staff.
+- **What makes it unique?** (User can add specific unique selling points here, e.g., "Its intuitive role-based interface and real-time sales tracking capabilities...")
 
-### 1.2 Problem Statement
+## Features
 
-Small retail shops lack affordable, easy-to-use automation platforms that integrate product management, cashier operations, inventory tracking, and sales analytics. Existing solutions are often expensive or overly complex for small-scale operations.
+- **User Authentication:** Secure signup for administrators and login for all users (Admin, Cashier).
+- **Role-Based Access Control:**
+    - **Admin Dashboard:** Centralized control panel for managing products, inventory, sales insights, transactions, and cashier accounts.
+    - **Cashier Dashboard:** Interface for processing sales, printing bills, and viewing product stock.
+- **Product Management (Admin):** Add new products, view existing products, update product details, and remove products from the catalog.
+- **Inventory Management (Admin & Cashier):** View current stock levels of products.
+- **Sales Processing (Cashier):** Perform purchases, calculate totals, and generate printable bills.
+- **Transaction Management (Admin):** View a comprehensive history of all sales transactions.
+- **Sales Insights (Admin):** Visualizations and reports on sales performance (feature to be expanded).
+- **Cashier Management (Admin):** Add, view, and manage cashier user accounts.
+- **Password Recovery:** "Forgot Password" functionality for users.
 
-### 1.3 Objectives
+## Tech Stack
 
-- To develop a web-based platform for automating retail operations.
-- To provide modules for product and cashier management.
-- To enable real-time inventory tracking and sales analytics.
-- To ensure secure, role-based access for admins and cashiers.
-- To deliver a responsive and user-friendly interface.
+- **Frontend:**
+    - React.js (with Hooks and Context API for state management)
+    - React Router for navigation
+    - CSS3 (with custom styling and potentially CSS variables for theming)
+    - Axios for API communication
+- **Backend:**
+    - Node.js
+    - Express.js framework
+    - MySQL (or a compatible SQL database, as indicated by `schema.sql`)
+    - RESTful APIs
+    - JWT (JSON Web Tokens) for authentication
+- **Database:**
+    - MySQL (based on `schema.sql` and typical `db.js` setups)
+- **Development Tools:**
+    - npm for package management
+    - Git & GitHub for version control
 
-### 1.4 Scope
+## Project Structure
 
-The project focuses on small retail shops, providing essential automation features without unnecessary complexity. The platform is extensible for future enhancements such as mobile apps and payment gateway integration.
+The project is organized into a client-side (React app) and a server-side (Node.js/Express backend) structure.
 
-### 1.5 Organization of the Report
+```
+Retail-Automation-Platform/
+├── package.json        # Frontend and global project scripts
+├── README.md           # This file
+├── public/             # Static assets for the React app (index.html, manifest, etc.)
+├── server/
+│   └── signup-backend/ # Backend application
+│       ├── auth.js             # Authentication routes (signup, login)
+│       ├── cashiers.js         # Cashier management routes
+│       ├── db.js               # Database connection logic
+│       ├── package.json        # Backend dependencies
+│       ├── products.js         # Product management routes
+│       ├── sales.js            # Sales processing routes
+│       ├── schema.sql          # Database schema definition
+│       ├── server.js           # Main backend server file
+│       ├── transactions.js     # Transaction viewing routes
+│       └── middleware/
+│           ├── authMiddleware.js   # JWT authentication middleware
+│           └── roleMiddleware.js   # Role-based access control middleware
+└── src/                  # Frontend React application source code
+    ├── App.jsx             # Main application component
+    ├── index.jsx           # Entry point for the React app
+    ├── component/          # UI components (Login, SignUp, Dashboards, etc.)
+    ├── hoc/                # Higher-Order Components (e.g., RequireAuth)
+    ├── routes/             # Routing configuration (e.g., ProtectedRoute)
+    └── styles/             # Global styles and themes
+```
 
-This report is organized into eight chapters, covering the introduction, literature review, system analysis, design, implementation, testing, results, conclusion, and references.
+## Installation
+
+Follow these steps to set up the project locally:
+
+**Prerequisites:**
+- Node.js and npm (Node Package Manager) installed.
+- MySQL server installed and running.
+
+**1. Clone the Repository:**
+```bash
+git clone https://github.com/yourusername/Retail-Automation-Platform.git # Replace with your actual repo URL
+cd Retail-Automation-Platform
+```
+
+**2. Setup Backend:**
+```bash
+cd server/signup-backend
+npm install
+```
+   - **Database Setup:**
+     1. Create a MySQL database (e.g., `retail_platform_db`).
+     2. Configure your database connection details in `server/signup-backend/db.js`.
+        You might need to update host, user, password, and database name.
+        Example `db.js` (ensure it matches your actual file):
+        ```javascript
+        // server/signup-backend/db.js
+        const mysql = require('mysql2');
+        const pool = mysql.createPool({
+          host: 'localhost',      // Or your DB host
+          user: 'your_db_user',   // Your MySQL username
+          password: 'your_db_password', // Your MySQL password
+          database: 'retail_platform_db', // The database you created
+          waitForConnections: true,
+          connectionLimit: 10,
+          queueLimit: 0
+        });
+        module.exports = pool.promise();
+        ```
+     3. Import the database schema using the `schema.sql` file. You can use a MySQL client (like MySQL Workbench, DBeaver, or the command line) to execute the SQL commands in `server/signup-backend/schema.sql`.
+        Example using MySQL CLI:
+        ```bash
+        mysql -u your_db_user -p your_retail_platform_db < schema.sql
+        ```
+
+**3. Setup Frontend:**
+```bash
+cd ../../ # Navigate back to the project root directory
+npm install
+```
+
+## Usage
+
+**1. Start the Backend Server:**
+```bash
+cd server/signup-backend
+npm start
+```
+   - The backend server will typically run on `http://localhost:5000` (or as configured in `server.js`).
+
+**2. Start the Frontend Development Server:**
+   Open a new terminal window/tab.
+```bash
+cd Retail-Automation-Platform # (If not already in the root directory)
+npm start
+```
+   - The React development server will typically run on `http://localhost:3000` and open automatically in your default web browser.
+
+You can now access the application by navigating to `http://localhost:3000`.
+
+## Configuration
+
+- **Backend Database:** Connection details for the MySQL database need to be configured in `server/signup-backend/db.js` as shown in the Installation section.
+- **API Port:** The backend API port can be changed in `server/signup-backend/server.js` (default is usually 5000).
+- **Frontend Port:** The React app's development port can sometimes be configured in `package.json` scripts or via environment variables if needed, but `npm start` usually defaults to 3000.
+- **Environment Variables:** If you plan to use `.env` files for sensitive data (like database credentials or JWT secrets), ensure they are documented here and added to `.gitignore`.
+  Example for backend (`server/signup-backend/.env`):
+  ```
+  DB_HOST=localhost
+  DB_USER=your_user
+  DB_PASSWORD=your_password
+  DB_NAME=retail_platform_db
+  JWT_SECRET=yourSuperSecretKeyForJWT
+  ```
+  And update `db.js` and `authMiddleware.js` to use these environment variables (e.g., using `dotenv` package).
+
+## API Reference
+
+The backend exposes RESTful APIs for various functionalities. All API routes are prefixed with `/api`.
+
+**Authentication (`/api/auth`)**
+- `POST /signup`: Admin user registration.
+  - **Request Body:** `{ "name": "Admin User", "email": "admin@example.com", "password": "securepassword123", "role": "admin" }`
+  - **Response:** Success message or error.
+- `POST /login`: User login (Admin/Cashier).
+  - **Request Body:** `{ "email": "user@example.com", "password": "password123", "role": "admin/cashier" }`
+  - **Response:** `{ "token": "jwt_token", "role": "user_role", "userId": "user_id" }` or error.
+
+**Products (`/api/products`)** (Protected, Admin access for CUD operations)
+- `GET /`: Get all products.
+- `GET /:id`: Get a single product by ID.
+- `POST /`: Add a new product (Admin only).
+  - **Request Body:** `{ "name": "Product Name", "description": "...", "price": 19.99, "stock_quantity": 100, "category_id": 1 }`
+- `PUT /:id`: Update an existing product (Admin only).
+- `DELETE /:id`: Delete a product (Admin only).
+
+**Sales (`/api/sales`)** (Protected)
+- `POST /`: Create a new sale transaction (Cashier/Admin).
+  - **Request Body:** `{ "userId": 1, "totalAmount": 150.75, "items": [{ "productId": 1, "quantity": 2, "priceAtSale": 25.00 }, ...] }`
+- `GET /`: Get all sales transactions (Admin only).
+- `GET /:id`: Get details of a specific sale (Admin only).
+
+**Cashiers (`/api/cashiers`)** (Protected, Admin access)
+- `POST /`: Add a new cashier.
+  - **Request Body:** `{ "name": "Cashier Name", "email": "cashier@example.com", "password": "password123", "role": "cashier" }`
+- `GET /`: Get all cashiers.
+- `PUT /:id`: Update cashier details.
+- `DELETE /:id`: Delete a cashier.
+
+**Transactions (`/api/transactions`)** (Protected, Admin access)
+- `GET /`: Get all transaction records (likely similar to GET /api/sales, or more detailed).
+
+*(Note: This is a summary. Actual request/response bodies and parameters might vary. Refer to backend route definitions in `server/signup-backend/*.js` for precise details. Ensure JWT token is sent in `Authorization` header for protected routes: `Authorization: Bearer <token>`)*
+
+## Screenshots
+
+![Login Page](path/to/your/screenshot/login.png)
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to the project, please follow these steps:
+
+1.  **Fork the repository.**
+2.  **Create a new branch** for your feature or bug fix:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3.  **Make your changes** and commit them with clear, descriptive messages.
+4.  **Push your changes** to your forked repository:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5.  **Submit a Pull Request** to the main repository's `main` or `develop` branch.
+
+Please ensure your code adheres to the existing coding style and includes tests if applicable.
+
+## Roadmap
+
+- [ ] **Advanced Sales Analytics:** More detailed charts and reports for sales trends, top-selling products, etc.
+- [ ] **Supplier Management:** Module for managing suppliers and procurement.
+- [ ] **Customer Management:** Basic CRM features for tracking customer purchase history.
+- [ ] **Low Stock Alerts:** Notifications for products running low on inventory.
+- [ ] **Barcode Scanner Integration:** For faster sales processing.
+- [ ] **Enhanced UI/UX:** Continuous improvements to the user interface and experience.
+- [ ] **Automated Testing:** Implement more comprehensive unit and integration tests for frontend and backend.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+## Authors
+
+- **Sawan Bhardwaj** - *Initial work & Lead Developer* - (https://github.com/sawanb22)
+
+## Acknowledgments
+
+- Hat tip to anyone whose code was used.
+- Inspiration.
+- etc.
 
 ---
-
-## Chapter 2: Literature Review
-
-### 2.1 Overview
-
-Retail automation has evolved significantly, with solutions ranging from simple inventory trackers to comprehensive ERP systems. However, small retailers often find existing solutions either too costly or lacking in customization.
-
-### 2.2 Related Work
-
-- **Point-of-Sale (POS) Systems:** Widely used for sales and inventory management but often require hardware investments.
-- **Cloud-based Retail Platforms:** Offer scalability but may have recurring costs unsuitable for small businesses.
-- **Open-source Solutions:** Provide flexibility but require technical expertise for setup and maintenance.
-
-### 2.3 Gaps Identified
-
-- Lack of affordable, user-friendly platforms for small retailers.
-- Limited integration of analytics and real-time inventory updates in existing low-cost solutions.
-- Need for modular, extensible systems that can grow with business needs.
-
----
-
-## Chapter 3: System Analysis
-
-### 3.1 Existing System
-
-Traditional retail operations rely on manual record-keeping, leading to inefficiencies and errors. Existing digital solutions are either too complex or not tailored for small-scale operations.
-
-### 3.2 Proposed System
-
-The Retail Automation Platform addresses these gaps by providing:
-
-- Centralized product and cashier management.
-- Real-time inventory updates.
-- Role-based dashboards for admins and cashiers.
-- Sales analytics and reporting.
-
-### 3.3 Objectives
-
-- Automate routine retail operations.
-- Minimize manual errors.
-- Provide actionable insights through analytics.
-
-### 3.4 Feasibility Study
-
-- **Technical Feasibility:** Utilizes widely adopted technologies (React, Node.js, PostgreSQL).
-- **Economic Feasibility:** Open-source stack minimizes costs.
-- **Operational Feasibility:** Designed for ease of use and minimal training.
-
-### 3.5 Requirements
-
-#### 3.5.1 Functional Requirements
-
-- User authentication and authorization.
-- Product CRUD operations.
-- Cashier management.
-- Inventory tracking.
-- Sales transaction processing.
-- Analytics dashboard.
-
-#### 3.5.2 Non-Functional Requirements
-
-- Security (JWT, role-based access).
-- Usability (responsive UI).
-- Performance (real-time updates).
-- Scalability (cloud hosting).
-
----
-
-## Chapter 4: System Design
-
-### 4.1 System Architecture
-
-The platform follows a client-server architecture with a RESTful API backend and a React-based frontend.
-
-🖼️ **[Insert System Architecture Diagram]**
-
-### 4.2 Module Design
-
-- **Authentication Module:** Handles login, JWT issuance, and role validation.
-- **Product Management Module:** CRUD operations for products.
-- **Cashier Management Module:** Administer cashier accounts.
-- **Inventory Module:** Tracks stock levels and updates after transactions.
-- **Sales Module:** Processes purchases and records transactions.
-- **Analytics Module:** Visualizes sales data and trends.
-
-### 4.3 Database Design
-
-The database is structured to support efficient queries for products, users, transactions, and sales analytics.
-
-🖼️ **[Insert ER Diagram of Database Schema]**
-
-#### Tables:
-- `users` (id, name, email, password, role)
-- `products` (id, name, price, stock, category)
-- `transactions` (id, product_id, quantity, total_price, timestamp)
-- `sales` (id, product_id, total_quantity, total_revenue, sales_date)
-
-### 4.4 User Interface Design
-
-The UI is designed for clarity and ease of use, with separate dashboards for admins and cashiers.
-
-🖼️ **[Insert Screenshot of "Admin Dashboard"]**  
-🖼️ **[Insert Screenshot of "Cashier Dashboard"]**  
-🖼️ **[Insert Screenshot of "Product Management UI"]**
-
-### 4.5 Security Considerations
-
-- JWT-based authentication for secure sessions.
-- Role-based access control for sensitive operations.
-- Input validation on both frontend and backend.
-
-💻 **[Insert Code Snippet for "JWT Authentication Middleware"]**
-
----
-
-## Chapter 5: Implementation
-
-### 5.1 Technology Stack
-
-- **Frontend:** React, CSS (with custom properties), Chart.js
-- **Backend:** Node.js, Express
-- **Database:** PostgreSQL
-- **Hosting:** AWS EC2 (backend), AWS RDS (database)
-- **Tools:** Postman, GitHub, pgAdmin
-
-### 5.2 Development Environment
-
-- OS: Windows 11
-- IDE: Visual Studio Code
-- Node.js: v18.x
-- PostgreSQL: v15.x
-
-### 5.3 Key Implementation Details
-
-#### 5.3.1 Authentication
-
-💻 **[Insert Code Snippet for "JWT Authentication Middleware"]**
-
-#### 5.3.2 Product CRUD
-
-💻 **[Insert Code Snippet for "Product CRUD API"]**
-
-#### 5.3.3 Transaction Logic
-
-💻 **[Insert Code Snippet for "Transaction Processing"]**
-
-#### 5.3.4 Frontend Routing
-
-💻 **[Insert Code Snippet for "React Router Setup"]**
-
-### 5.4 Screenshots
-
-🖼️ **[Insert Screenshot of "Login Page"]**  
-🖼️ **[Insert Screenshot of "Product Management UI"]**  
-🖼️ **[Insert Screenshot of "Checkout UI"]**
-
----
-
-## Chapter 6: Testing
-
-### 6.1 Testing Methodologies
-
-- **Manual Testing:** Conducted by team members and classmates.
-- **Unit Testing:** For backend API endpoints.
-- **Integration Testing:** End-to-end flows tested using Postman.
-
-### 6.2 Test Cases
-
-| Test Case ID | Description | Input | Expected Output | Status |
-|--------------|-------------|-------|----------------|--------|
-| TC01 | Admin Login | Valid credentials | Dashboard loads | Pass |
-| TC02 | Add Product | Valid product data | Product added | Pass |
-| TC03 | Purchase | Sufficient stock | Transaction success | Pass |
-| TC04 | Purchase | Insufficient stock | Error message | Pass |
-
-### 6.3 Screenshots
-
-🖼️ **[Insert Screenshot of "Test Case Execution"]**
-
----
-
-## Chapter 7: Results and Discussion
-
-### 7.1 Results
-
-- The platform successfully automates key retail operations.
-- Real-time inventory updates and analytics are functional.
-- User feedback indicates improved efficiency and ease of use.
-
-### 7.2 Discussion
-
-- The use of modern web technologies enabled rapid development and deployment.
-- Manual testing and user feedback were instrumental in refining the UI and workflows.
-- The system is robust but can be further enhanced with additional features.
-
-📊 **[Insert Bar Chart of "Top 5 Selling Products"]**
-
----
-
-## Chapter 8: Conclusion and Future Work
-
-### 8.1 Conclusion
-
-The Retail Automation Platform meets its objectives of automating retail operations for small shops. It provides a secure, user-friendly, and extensible solution for product management, cashier operations, inventory tracking, and sales analytics.
-
-### 8.2 Future Work
-
-- **Mobile App Version:** To enable on-the-go management.
-- **Barcode Scanner Integration:** For faster checkout.
-- **Payment Gateway Integration:** To support digital payments.
-- **Stock-out Notifications:** For proactive inventory management.
-
----
-
-## References
-
-1. W3Schools. (2024). [React Documentation](https://reactjs.org/)
-2. Node.js Foundation. (2024). [Node.js Documentation](https://nodejs.org/)
-3. PostgreSQL Global Development Group. (2024). [PostgreSQL Documentation](https://www.postgresql.org/)
-4. AWS Documentation. (2024). [Amazon EC2](https://aws.amazon.com/ec2/), [Amazon RDS](https://aws.amazon.com/rds/)
-5. Chart.js Documentation. (2024). [Chart.js](https://www.chartjs.org/)
-6. Express.js Documentation. (2024). [Express.js](https://expressjs.com/)
-7. GitHub. (2024). [GitHub Docs](https://docs.github.com/)
-
----
-
-<!--  
-Formatting Notes:
-- Font: Times New Roman, 12pt
-- Line Spacing: 1.5
-- Margins: 1 inch
-- Headings: Proper hierarchical formatting
-- Page Numbers: Bottom center
-- Figure captions below, Table captions above
--->
