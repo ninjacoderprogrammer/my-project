@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../../config/config';
 
 const ProductManagement = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ const ProductManagement = () => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/products', {
+        const response = await axios.get(`${config.BACKEND_SERVER_URL}/api/products`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProducts(response.data);
@@ -31,7 +32,7 @@ const ProductManagement = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/products',
+        `${config.BACKEND_SERVER_URL}/api/products`,
         { name, price, stock },
         { headers: { Authorization: `Bearer ${token}` } }
       );

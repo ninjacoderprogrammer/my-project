@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import config from "../../config/config";
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -31,7 +32,7 @@ const SalesInsights = () => {
     setErrors(prev => ({ ...prev, topProducts: null })); // Clear previous top products error
     try {
       const token = localStorage.getItem("token");
-      let url = "http://localhost:5000/api/sales/top-products";
+      let url = `${config.BACKEND_SERVER_URL}/api/sales/top-products`;
       const params = {};
       if (startDateFilter) {
         params.start_date = startDateFilter;

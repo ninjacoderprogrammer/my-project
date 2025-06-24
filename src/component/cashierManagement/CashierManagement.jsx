@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/theme.css"; // Global theme
 import "./cashierManagement.css"; // Component-specific styles
+import config from "../../config/config";
 
 const CashierManagement = () => {
   const [cashiers, setCashiers] = useState([]);
@@ -14,7 +15,7 @@ const CashierManagement = () => {
   const fetchCashiers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/cashiers", {
+      const response = await axios.get(`${config.BACKEND_SERVER_URL}/api/cashiers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCashiers(response.data);
@@ -32,7 +33,7 @@ const CashierManagement = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/api/cashiers",
+        `${config.BACKEND_SERVER_URL}/api/cashiers`,
         { name, email, password, phone },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -51,7 +52,7 @@ const CashierManagement = () => {
   const handleDeleteCashier = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/cashiers/${id}`, {
+      await axios.delete(`config.BACKEND_SERVER_URL/api/cashiers/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Cashier deleted successfully!");

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../styles/theme.css"; // Global theme
 import "./Login.css"; // Component-specific styles - NOW THE NEW TWO-COLUMN LAYOUT
+import config from "../../config/config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
     setError(""); // Clear previous errors
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${config.BACKEND_SERVER_URL}/api/auth/login`,
         { email, password, role }
       );
       localStorage.setItem("token", response.data.token);
