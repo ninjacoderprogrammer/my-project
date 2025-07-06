@@ -14,8 +14,6 @@ router.get('/protected', verifyToken, (req, res) => {
 // Signup API
 router.post('/signup', async (req, res) => {
   const { name, email, password, role } = req.body;
-
-  
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await pool.query(

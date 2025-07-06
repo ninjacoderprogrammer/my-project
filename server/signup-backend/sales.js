@@ -1,4 +1,3 @@
-// filepath: c:\Users\bhard\Desktop\my-project\server\signup-backend\sales.js
 const express = require('express');
 const pool = require('./db');
 const verifyToken = require('./middleware/authMiddleware');
